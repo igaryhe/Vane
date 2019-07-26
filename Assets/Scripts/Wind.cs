@@ -3,7 +3,7 @@ using Random = UnityEngine.Random;
 
 public class Wind : MonoBehaviour
 {
-    public CommandInterface ci;
+    // public CommandInterface ci;
     public AnimationCurve rotCurveX;
     public AnimationCurve antiRotCurveX;
     public AnimationCurve rotCurveZ;
@@ -73,6 +73,7 @@ public class Wind : MonoBehaviour
                 Destroy(gameObject, 5f);
             }
         }
+        /*
         else if (other.CompareTag("Vane"))
         {
             if (other.transform.forward == transform.forward) return;
@@ -80,5 +81,6 @@ public class Wind : MonoBehaviour
             rc.Execute();
             ci.command.affected.Push(rc);
         }
+        */
     }
 }
