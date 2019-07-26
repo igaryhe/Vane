@@ -42,9 +42,12 @@ public class Board : MonoBehaviour
             }
             else
             {
-                var ppc = new PlacePlankCommand((int) (_pos.x), (int) (_pos.z), this);
-                ppc.Execute();
-                _gm.commands.Push(ppc);
+                if (!_gm.isPcountZero())
+                {
+                    var ppc = new PlacePlankCommand((int) (_pos.x), (int) (_pos.z), this);
+                    ppc.Execute();
+                    _gm.commands.Push(ppc);
+                }
             }
         }
     }

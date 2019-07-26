@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
@@ -6,11 +7,12 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
-    public GameObject vane, fan, plank, board, placeable, barrier, stone;
+    public GameObject vane, fan, plank, board, barrier, stone;
     private const string filepath = "Assets/Resources/Levels/level1.txt";
     public int col, row;
     private const float O = 0.5f;
     private int _count;
+    private int _pcount;
     public Stack<Command> commands = new Stack<Command>();
 
     public static GameManager Instance
@@ -30,24 +32,54 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        var b = File.ReadAllText(filepath).Split('\n').Select(c => c.ToCharArray()).ToArray();
+        var file = File.ReadAllText(filepath);
+        _pcount = (int)char.GetNumericValue(file[0]);
+        file = file.Remove(0, 2);
+        var wcount = char.GetNumericValue(file[0]);
+        file = file.Remove(0, 2);
+        var fans = new List<string>();
+        for (var i = 0; i != wcount; i++)
+        {
+            fans.Add(file.Substring(0, 3));
+            file = file.Remove(0, 3);
+        }
+        file = file.Remove(0, 1);
+        var b = file.Split('\n').Select(c => c.ToCharArray()).ToArray();
         row = b.Length;
         col = b[0].Length;
-        for (var i = 0; i != row + 2; i++)
+        foreach (var f in fans)
         {
-            for (var j = 0; j != col + 2; j++)
+            switch (f[0])
             {
-                if (i == 0 || j == 0)
-                {
-                    Instantiate(placeable, new Vector3((i - 0.5f), 0, (j - 0.5f)), Quaternion.identity);
-                }
-
-                if (i == row + 1 || j == col + 1)
-                {
-                    Instantiate(placeable, new Vector3((i - 0.5f), 0, (j - 0.5f)), Quaternion.identity);
-                }
+                case 'c':
+                    switch (f[2])
+                    {
+                        case 'd':
+                            Instantiate(fan, new Vector3(-0.5f ,0, (float)char.GetNumericValue(f[1]) + 0.5f),
+                                Quaternion.LookRotation(Vector3.right, Vector3.up));
+                            break;
+                        case 'u':
+                            Instantiate(fan, new Vector3(row + 0.5f ,0, (float)char.GetNumericValue(f[1]) + 0.5f),
+                                Quaternion.LookRotation(Vector3.left, Vector3.up));
+                            break;
+                    }
+                    break;
+                case 'r':
+                    switch (f[2])
+                    {
+                        case 'r':
+                            Instantiate(fan, new Vector3((float)char.GetNumericValue(f[1]) + 0.5f ,0, -0.5f),
+                                Quaternion.LookRotation(Vector3.forward, Vector3.up));
+                            break;
+                        case 'l':
+                            Instantiate(fan, new Vector3((float)char.GetNumericValue(f[1]) + 0.5f ,0, col + 0.5f),
+                                Quaternion.LookRotation(Vector3.back, Vector3.up));
+                            break;
+                    }
+                    break;
             }
         }
+
         for (var i = 0; i != row; i++)
         {
             for (var j = 0; j != col; j++)
@@ -115,5 +147,25 @@ public class GameManager : MonoBehaviour
     public void Increase()
     {
         _count++;
+    }
+
+    public void PlankDec()
+    {
+        _pcount--;
+    }
+
+    public void PlankInc()
+    {
+        _pcount++;
+    }
+
+    public bool isPcountZero()
+    {
+        return _pcount == 0;
+    }
+
+    private string Trim(string s)
+    {
+        return s.Remove(0, 1);
     }
 }

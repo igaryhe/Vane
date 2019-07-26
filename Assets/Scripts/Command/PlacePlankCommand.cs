@@ -6,6 +6,7 @@ public class PlacePlankCommand : Command
     private Board _board;
     private GameObject _plank;
     private GameObject _instance;
+    private GameManager _gm = GameManager.Instance;
 
     public PlacePlankCommand(int x, int y, Board board)
     {
@@ -18,11 +19,13 @@ public class PlacePlankCommand : Command
     {
         _instance = Object.Instantiate(_plank, new Vector3(_x + 0.5f, 0.5f, _y + 0.5f), Quaternion.identity);
         _board.isPlaced = true;
+        _gm.PlankDec();
     }
 
     public override void Undo()
     {
         Object.Destroy(_instance);
         _board.isPlaced = false;
+        _gm.PlankInc();
     }
 }
