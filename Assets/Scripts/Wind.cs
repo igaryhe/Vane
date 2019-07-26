@@ -27,19 +27,20 @@ public class Wind : MonoBehaviour
         if (other.gameObject.CompareTag("Plank"))
         {
             var i = Vector3.Dot(GetComponent<Rigidbody>().velocity.normalized, other.transform.right);
-            transform.position = other.transform.position;
             var right = other.transform.right;
-            if (i > 0.1)
+            if (i > 0.1 && i < 0.9)
             {
+                transform.position = other.transform.position;
                 _rb.velocity = right * speed;
                 transform.forward = right;
             }
-            else if (i < -0.1)
+            else if (i < -0.1 && i > -0.9)
             {
+                transform.position = other.transform.position;
                 _rb.velocity = -right * speed;
                 transform.forward = -right;
             }
-            else
+            else if (i > -0.1 && i < 0.1)
             {
                 _rb.velocity = Vector3.zero;
                 var vel = windPS.velocityOverLifetime;
@@ -55,13 +56,7 @@ public class Wind : MonoBehaviour
         {
             var i = Vector3.Dot(gameObject.GetComponent<Rigidbody>().velocity.normalized, other.transform.forward);
             //transform.position = other.transform.position;
-            if (i > 0.1)
-            {
-            }
-            else if (i < -0.1)
-            {
-            }
-            else
+            if (i < -0.9 && i > -1.1)
             {
                 _rb.velocity = Vector3.zero;
                 var vel = windPS.velocityOverLifetime;
