@@ -3,7 +3,7 @@ using UnityEngine;
 public class RotateCommand : Command
 {
     private Transform _transform;
-    private readonly Vector3 _direction;
+    public readonly Vector3 direction;
     private readonly Vector3 _prevDirection;
     private readonly float _overTime = 3f;
     private GameManager gm = GameManager.Instance;
@@ -11,13 +11,13 @@ public class RotateCommand : Command
     public RotateCommand(Transform transform, Vector3 direction)
     {
         _transform = transform;
-        _direction = direction;
+        this.direction = direction;
         _prevDirection = transform.forward;
     }
     
     public override void Execute()
     {
-        gm.StartCoroutine(Rotate(_direction));
+        gm.StartCoroutine(Rotate(direction));
     }
 
     public override void Undo()

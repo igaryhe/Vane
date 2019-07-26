@@ -34,7 +34,7 @@ public class Fan : MonoBehaviour, CommandInterface
             i = 0;
             var instance = Instantiate(windParticle, transform.position + new Vector3(0, 0.5f, 0),
                 transform.rotation);
-            instance.GetComponent<Wind>().ci = this;
+            // instance.GetComponent<Wind>().ci = this;
         }
         else
         {

@@ -3,7 +3,7 @@ using Random = UnityEngine.Random;
 
 public class Wind : MonoBehaviour
 {
-    public CommandInterface ci;
+    // public CommandInterface ci;
     public AnimationCurve rotCurveX;
     public AnimationCurve antiRotCurveX;
     public AnimationCurve rotCurveZ;
