@@ -30,6 +30,7 @@ public class Board : MonoBehaviour
     {
         if (!isPlaced)
         {
+            if (_pos.x < 0f && _pos.z < 0f) return;
             if (_pos.x < 0f || _pos.z < 0f)
             {
                 var pfc = new PlaceFanCommand((int) (_pos.x - 0.5), (int) (_pos.z - 0.5), this);
