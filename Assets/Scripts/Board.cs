@@ -30,8 +30,11 @@ public class Board : MonoBehaviour
     {
         if (!isPlaced)
         {
-            if (_pos.x < 0f && _pos.z < 0f) return;
-            if (_pos.x < 0f || _pos.z < 0f)
+            if (_pos.x < 0f && _pos.z < 0f ||
+                _pos.x < 0f && _pos.z > _gm.col ||
+                _pos.x > _gm.row && _pos.z < 0f ||
+                _pos.x > _gm.row && _pos.z > _gm.col) return;
+            if (_pos.x < 0f || _pos.z < 0f || _pos.x > _gm.row || _pos.z > _gm.col)
             {
                 var pfc = new PlaceFanCommand((int) (_pos.x - 0.5), (int) (_pos.z - 0.5), this);
                 pfc.Execute();

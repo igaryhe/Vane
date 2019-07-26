@@ -77,5 +77,16 @@ public class Wind : MonoBehaviour
             ci.command.affected.Push(rc);
         }
         */
+        else if (other.gameObject.CompareTag("Barrier"))
+        {
+            _rb.velocity = Vector3.zero;
+            var vel = windPS.velocityOverLifetime;
+            vel.x = new ParticleSystem.MinMaxCurve(1, antiRotCurveX, rotCurveX);
+            vel.z = new ParticleSystem.MinMaxCurve(1, antiRotCurveZ, rotCurveZ);
+            var main = windPS.main;
+            //main.startLifetimeMultiplier = 0.2f;
+            main.loop = false;
+            Destroy(gameObject, 5f);
+        }
     }
 }

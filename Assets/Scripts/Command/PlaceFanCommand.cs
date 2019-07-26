@@ -8,6 +8,7 @@ public class PlaceFanCommand : Command
     private GameObject _instance;
     // public Stack<RotateCommand> affected = new Stack<RotateCommand>();
     private Board _board;
+    private GameManager gm;
 
     public PlaceFanCommand(int x, int y, Board board)
     {
@@ -16,6 +17,7 @@ public class PlaceFanCommand : Command
         _board = board;
         fan = GameManager.Instance.fan;
         affected = new Stack<RotateCommand>();
+        gm = GameManager.Instance;
     }
     
     public override void Execute()
@@ -30,6 +32,20 @@ public class PlaceFanCommand : Command
         if (_y == -1)
         {
             _instance = Object.Instantiate(fan, new Vector3(_x + 0.5f ,0, _y + 0.5f), Quaternion.identity);
+            _instance.GetComponent<Fan>().command = this;
+        }
+
+        if (_x == gm.row)
+        {
+            _instance = Object.Instantiate(fan, new Vector3(_x + 0.5f ,0, _y + 0.5f),
+                Quaternion.LookRotation(Vector3.left, Vector3.up));
+            _instance.GetComponent<Fan>().command = this;
+        }
+
+        if (_y == gm.col)
+        {
+            _instance = Object.Instantiate(fan, new Vector3(_x + 0.5f ,0, _y + 0.5f),
+                Quaternion.LookRotation(Vector3.back, Vector3.up));
             _instance.GetComponent<Fan>().command = this;
         }
 

@@ -6,7 +6,10 @@ public class Vane : MonoBehaviour
     private GameManager _gm;
     private Vector3 lastDir;
     private RotateCommand rc;
-    private bool _swing;
+    public bool _swing;
+    public Quaternion low, high;
+    private bool clockWise;
+    private float t;
 
     private void Start()
     {
@@ -20,7 +23,7 @@ public class Vane : MonoBehaviour
 
     private void Update()
     {
-        if (transform.forward == Vector3.forward && !_counted)
+        if (transform.forward == Vector3.forward && !_counted && !_swing)
         {
             _counted = true;
             _gm.Decrease();
@@ -34,13 +37,26 @@ public class Vane : MonoBehaviour
         // TODO: Make it swing
         if (_swing)
         {
-            Debug.Log("SWINGING~~~");
+            if (transform.rotation == low || transform.rotation == high)
+            {
+                clockWise = !clockWise;
+                t = 0;
+            }
+
+            t += Time.deltaTime;
+            if (clockWise)
+            {
+                transform.rotation = Quaternion.Slerp(transform.rotation, high, t);
+            }
+            else
+            {
+                transform.rotation = Quaternion.Slerp(transform.rotation, low, t);
+            }
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.transform.forward);
         if (other.CompareTag("Wind"))
         {
             if (rc == null)
@@ -59,8 +75,19 @@ public class Vane : MonoBehaviour
             }
             else
             {
-                rc = new RotateCommand(transform, other.transform.forward);
-                if (!_swing) _swing = true;
+                if (_swing)
+                {
+                    rc = new RotateCommand(transform, other.transform.forward);
+                }
+                else
+                {
+                    // rc.Stop();
+                    low = Quaternion.LookRotation(rc.direction, Vector3.up);
+                    high = Quaternion.LookRotation(other.transform.forward, Vector3.up);
+                    rc = new RotateCommand(transform, other.transform.forward);
+                    // rc.Execute();
+                    _swing = true;
+                }
             }
             // ci.command.affected.Push(rc);
         }
