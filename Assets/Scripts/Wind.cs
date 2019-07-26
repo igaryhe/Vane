@@ -77,6 +77,10 @@ public class Wind : MonoBehaviour
             ci.command.affected.Push(rc);
         }
         */
+        else if (other.CompareTag("DeadZone"))
+        {
+            Destroy(gameObject);
+        }
         else if (other.gameObject.CompareTag("Barrier"))
         {
             _rb.velocity = Vector3.zero;
