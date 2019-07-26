@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Numerics;
+using UnityEngine;
+using Quaternion = UnityEngine.Quaternion;
+using Vector3 = UnityEngine.Vector3;
 
 public class Vane : MonoBehaviour
 {
@@ -10,6 +13,7 @@ public class Vane : MonoBehaviour
     public Quaternion low, high;
     private bool clockWise;
     private float t;
+    public Vector3 win;
 
     private void Start()
     {
@@ -23,13 +27,13 @@ public class Vane : MonoBehaviour
 
     private void Update()
     {
-        if (transform.forward == Vector3.forward && !_counted && !_swing)
+        if (transform.forward == win && !_counted && !_swing)
         {
             _counted = true;
             _gm.Decrease();
         }
 
-        if (transform.forward != Vector3.forward && _counted)
+        if (transform.forward != win && _counted)
         {
             _counted = false;
             _gm.Increase();

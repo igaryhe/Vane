@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     private int _count;
     private int _pcount;
     public Stack<Command> commands = new Stack<Command>();
+    public GameObject ui;
 
     public static GameManager Instance
     {
@@ -32,18 +33,29 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        ui.SetActive(false);
         var file = File.ReadAllText(filepath);
+        
+        // read plank count
         _pcount = (int)char.GetNumericValue(file[0]);
         file = file.Remove(0, 2);
+
+        var win = NumToV3(file[0]);
+        file = file.Remove(0, 2);
+        
+        // read wind count
         var wcount = char.GetNumericValue(file[0]);
         file = file.Remove(0, 2);
+        
+        // read fan location
         var fans = new List<string>();
         for (var i = 0; i != wcount; i++)
         {
-            fans.Add(file.Substring(0, 3));
-            file = file.Remove(0, 3);
+            fans.Add(file.Substring(0, 4));
+            file = file.Remove(0, 4);
         }
-        file = file.Remove(0, 1);
+
+        // read board
         var b = file.Split('\n').Select(c => c.ToCharArray()).ToArray();
         row = b.Length;
         col = b[0].Length;
@@ -99,24 +111,10 @@ public class GameManager : MonoBehaviour
                     else
                     {
                         _count++;
-                        var forward = new Vector3();
-                        switch (b[i][j])
-                        {
-                            case 'l':
-                                forward = Vector3.back;
-                                break;
-                            case 'u':
-                                forward = Vector3.left;
-                                break;
-                            case 'r':
-                                forward = Vector3.forward;
-                                break;
-                            case 'd':
-                                forward = Vector3.right;
-                                break;
-                        }
-                        Instantiate(vane, new Vector3(i + O, 0, j + O),
+                        var forward = NumToV3(b[i][j]);
+                        var instance = Instantiate(vane, new Vector3(i + O, 0, j + O),
                             Quaternion.LookRotation(forward, Vector3.up));
+                        instance.GetComponent<Vane>().win = win;
                     }
                 }
             }
@@ -128,6 +126,8 @@ public class GameManager : MonoBehaviour
         if (_count == 0)
         {
             Debug.Log("You Win!");
+            ui.SetActive(true);
+            Time.timeScale = 0f;
         }
 
         if (Input.GetKeyDown(KeyCode.Z))
@@ -167,5 +167,30 @@ public class GameManager : MonoBehaviour
     private string Trim(string s)
     {
         return s.Remove(0, 1);
+    }
+
+    private Vector3 NumToV3(char n)
+    {
+        switch (n)
+        {
+            case '4':
+                return Vector3.back;
+            case '8':
+                return Vector3.left;
+            case '6':
+                return Vector3.forward;
+            case '2':
+                return Vector3.right;
+            case '7':
+                return (Vector3.left + Vector3.back).normalized;
+            case '9':
+                return (Vector3.left + Vector3.forward).normalized;
+            case '3':
+                return (Vector3.right + Vector3.forward).normalized;
+            case '1':
+                return (Vector3.right + Vector3.back).normalized;
+            default:
+                return Vector3.zero;
+        }
     }
 }
