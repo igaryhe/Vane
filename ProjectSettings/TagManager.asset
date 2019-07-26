@@ -8,6 +8,8 @@ TagManager:
   - Plank
   - Wind
   - DeadZone
+  - Stone
+  - Barrier
   layers:
   - Default
   - TransparentFX

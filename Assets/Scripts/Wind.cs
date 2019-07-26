@@ -68,17 +68,29 @@ public class Wind : MonoBehaviour
                 Destroy(gameObject, 5f);
             }
         }
-        //else if (other.CompareTag("Vane"))
-        //{
-        //    if (other.transform.forward == transform.forward) return;
-        //    var rc = new RotateCommand(other.transform, transform.forward);
-        //    rc.Execute();
-        //    ci.command.affected.Push(rc);
-        //}
-
+        /*
+        else if (other.CompareTag("Vane"))
+        {
+            if (other.transform.forward == transform.forward) return;
+            var rc = new RotateCommand(other.transform, transform.forward);
+            rc.Execute();
+            ci.command.affected.Push(rc);
+        }
+        */
         else if (other.CompareTag("DeadZone"))
         {
             Destroy(gameObject);
+        }
+        else if (other.gameObject.CompareTag("Barrier"))
+        {
+            _rb.velocity = Vector3.zero;
+            var vel = windPS.velocityOverLifetime;
+            vel.x = new ParticleSystem.MinMaxCurve(1, antiRotCurveX, rotCurveX);
+            vel.z = new ParticleSystem.MinMaxCurve(1, antiRotCurveZ, rotCurveZ);
+            var main = windPS.main;
+            //main.startLifetimeMultiplier = 0.2f;
+            main.loop = false;
+            Destroy(gameObject, 5f);
         }
     }
 }

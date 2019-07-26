@@ -7,7 +7,8 @@ public class RotateCommand : Command
     private readonly Vector3 _prevDirection;
     private readonly float _overTime = 3f;
     private GameManager gm = GameManager.Instance;
-    
+    private IEnumerator coroutine;
+
     public RotateCommand(Transform transform, Vector3 direction)
     {
         _transform = transform;
@@ -17,12 +18,19 @@ public class RotateCommand : Command
     
     public override void Execute()
     {
-        gm.StartCoroutine(Rotate(direction));
+        Debug.Log("Rotating");
+        coroutine = Rotate(direction);
+        gm.StartCoroutine(coroutine);
     }
 
     public override void Undo()
     {
         gm.StartCoroutine(Rotate(_prevDirection));
+    }
+
+    public void Stop()
+    {
+        gm.StopCoroutine(coroutine);
     }
     
     private IEnumerator Rotate(Vector3 dir)
