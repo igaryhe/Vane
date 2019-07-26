@@ -68,13 +68,14 @@ public class Wind : MonoBehaviour
                 Destroy(gameObject, 5f);
             }
         }
-        else if (other.CompareTag("Vane"))
-        {
-            if (other.transform.forward == transform.forward) return;
-            var rc = new RotateCommand(other.transform, transform.forward);
-            rc.Execute();
-            ci.command.affected.Push(rc);
-        }
+        //else if (other.CompareTag("Vane"))
+        //{
+        //    if (other.transform.forward == transform.forward) return;
+        //    var rc = new RotateCommand(other.transform, transform.forward);
+        //    rc.Execute();
+        //    ci.command.affected.Push(rc);
+        //}
+
         else if (other.CompareTag("DeadZone"))
         {
             Destroy(gameObject);
