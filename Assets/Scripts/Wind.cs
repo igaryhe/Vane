@@ -75,5 +75,9 @@ public class Wind : MonoBehaviour
             rc.Execute();
             ci.command.affected.Push(rc);
         }
+        else if (other.CompareTag("DeadZone"))
+        {
+            Destroy(gameObject);
+        }
     }
 }
