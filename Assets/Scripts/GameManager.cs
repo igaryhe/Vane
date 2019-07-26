@@ -50,18 +50,16 @@ public class GameManager : MonoBehaviour
                 {
                     Instantiate(placeable, new Vector3((i - 0.5f), 0, (j - 0.5f)), Quaternion.identity);
                 }
-                else
-                {
-                    Instantiate(board, new Vector3((i - 0.5f), 0, (j - 0.5f)), Quaternion.identity);
-                }
             }
         }
         for (var i = 0; i != _row; i++)
         {
             for (var j = 0; j != _col; j++)
             {
+                var boardInstance = Instantiate(board, new Vector3((i + 0.5f), 0, (j + 0.5f)), Quaternion.identity);
                 if (b[i][j] != '.')
                 {
+                    boardInstance.GetComponent<Board>().isPlaced = true;
                     _count++;
                     var forward = new Vector3();
                     switch (b[i][j])
