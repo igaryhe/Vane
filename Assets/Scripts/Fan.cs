@@ -24,7 +24,7 @@ public class Fan : MonoBehaviour, CommandInterface
 
     private void Update()
     {
-        GenerateWind(1);
+        GenerateWind(0.7f);
     }
 
     private void GenerateWind(float interval)

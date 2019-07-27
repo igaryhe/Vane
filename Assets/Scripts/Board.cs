@@ -18,7 +18,7 @@ public class Board : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        _mat.color = Color.gray;
+        _mat.color = Color.yellow;
     }
 
     private void OnMouseExit()
