@@ -9,7 +9,7 @@ public class Wind : MonoBehaviour
     public AnimationCurve rotCurveZ;
     public AnimationCurve antiRotCurveZ;
     private Rigidbody _rb;
-    private float speed = 2f;
+    private float speed = 4f;
     private float rdm;
     private ParticleSystem windPS;
     // Start is called before the first frame update
