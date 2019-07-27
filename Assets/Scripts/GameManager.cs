@@ -11,14 +11,16 @@ public class GameManager : MonoBehaviour
     public GameObject vane, fan, plank, board, barrier, stone;
     public Transform level;
     public int col, row;
-    private const float O = 0.5f;
-    private int _count;
-    private int _pcount;
-    private int _fcount;
     public Vector3 win;
     public Stack<Command> commands = new Stack<Command>();
     public GameObject ui;
     public GameObject winds, planks;
+    public int levelNum;
+    
+    private const float O = 0.5f;
+    private int _count;
+    private int _pcount;
+    private int _fcount;
 
     public static GameManager Instance
     {
@@ -38,7 +40,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         ui.SetActive(false);
-        LoadLevel(1);
+        LoadLevel(levelNum);
 
     }
 
@@ -65,7 +67,7 @@ public class GameManager : MonoBehaviour
             {
                 Destroy(l.gameObject);
             }
-            LoadLevel(1);
+            LoadLevel(levelNum);
         }
     }
 
