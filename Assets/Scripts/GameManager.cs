@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.IO;
 using System.Linq;
 using UnityEngine;
@@ -35,6 +36,7 @@ public class GameManager : MonoBehaviour
     {
         ui.SetActive(false);
         var file = File.ReadAllText(filepath);
+        file = file.Replace("\r", String.Empty);
         
         // read plank count
         _pcount = (int)char.GetNumericValue(file[0]);
@@ -51,6 +53,7 @@ public class GameManager : MonoBehaviour
         var fans = new List<string>();
         for (var i = 0; i != wcount; i++)
         {
+            Debug.Log(file.Substring(0, 4));
             fans.Add(file.Substring(0, 4));
             file = file.Remove(0, 4);
         }
