@@ -19,7 +19,7 @@ public class Fan : MonoBehaviour, CommandInterface
 
     private void Update()
     {
-        GenerateWind(2);
+        GenerateWind(1);
     }
 
     private void GenerateWind(float interval)
