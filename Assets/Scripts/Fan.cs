@@ -4,23 +4,18 @@ using UnityEngine;
 public class Fan : MonoBehaviour, CommandInterface
 {
     public GameObject windParticle;
-    private float i = 0f;
+    private float i;
+    private GameManager _gm;
     public Command command { get; set; }
     /*
     public GameObject ball;
     private const float speed = 2f;
     */
     
-    /*
     private void Start()
     {
-        var trans = transform.position;
-        trans.y += 0.5f;
-        var ins = Instantiate(ball, trans, Quaternion.LookRotation(transform.forward, Vector3.up));
-        ins.GetComponent<Rigidbody>().velocity = transform.forward * speed;
-        ins.GetComponent<Ball>().ci = this;
+        _gm = GameManager.Instance;
     }
-    */
 
     private void Update()
     {
@@ -34,6 +29,7 @@ public class Fan : MonoBehaviour, CommandInterface
             i = 0;
             var instance = Instantiate(windParticle, transform.position + new Vector3(0, 0.5f, 0),
                 transform.rotation);
+            instance.transform.parent = _gm.winds.transform;
             // instance.GetComponent<Wind>().ci = this;
         }
         else

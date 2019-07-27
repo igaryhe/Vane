@@ -13,7 +13,6 @@ public class Vane : MonoBehaviour
     public Quaternion low, high;
     private bool clockWise;
     private float t;
-    public Vector3 win;
 
     private void Start()
     {
@@ -27,13 +26,13 @@ public class Vane : MonoBehaviour
 
     private void Update()
     {
-        if (transform.forward == win && !_counted && !_swing)
+        if (transform.forward == _gm.win && !_counted && !_swing)
         {
             _counted = true;
             _gm.Decrease();
         }
 
-        if (transform.forward != win && _counted)
+        if (transform.forward != _gm.win && _counted)
         {
             _counted = false;
             _gm.Increase();

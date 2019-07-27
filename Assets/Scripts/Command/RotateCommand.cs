@@ -39,11 +39,12 @@ public class RotateCommand : Command
         var startTime = Time.time;
         while (Time.time < startTime + _overTime)
         {
+            if (_transform == null) break;
             _transform.rotation = Quaternion.Slerp(_transform.rotation, rotation, 
                 (Time.time - startTime) / _overTime);
-            yield return null;
+               yield return null;
         }
-
-        _transform.rotation = rotation;
+        if (_transform != null)
+            _transform.rotation = rotation;
     }
 }

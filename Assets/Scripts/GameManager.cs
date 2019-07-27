@@ -1,21 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
     public GameObject vane, fan, plank, board, barrier, stone;
-    private const string filepath = "Assets/Resources/Levels/level1.txt";
+    public Transform level;
     public int col, row;
     private const float O = 0.5f;
     private int _count;
     private int _pcount;
+    private int _fcount;
+    public Vector3 win;
     public Stack<Command> commands = new Stack<Command>();
     public GameObject ui;
+    public GameObject winds, planks;
 
     public static GameManager Instance
     {
@@ -35,93 +38,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         ui.SetActive(false);
-        var file = File.ReadAllText(filepath);
-        file = file.Replace("\r", String.Empty);
-        
-        // read plank count
-        _pcount = (int)char.GetNumericValue(file[0]);
-        file = file.Remove(0, 2);
+        LoadLevel(1);
 
-        var win = NumToV3(file[0]);
-        file = file.Remove(0, 2);
-        
-        // read wind count
-        var wcount = char.GetNumericValue(file[0]);
-        file = file.Remove(0, 2);
-        
-        // read fan location
-        var fans = new List<string>();
-        for (var i = 0; i != wcount; i++)
-        {
-            Debug.Log(file.Substring(0, 4));
-            fans.Add(file.Substring(0, 4));
-            file = file.Remove(0, 4);
-        }
-
-        // read board
-        var b = file.Split('\n').Select(c => c.ToCharArray()).ToArray();
-        row = b.Length;
-        col = b[0].Length;
-        foreach (var f in fans)
-        {
-            switch (f[0])
-            {
-                case 'c':
-                    switch (f[2])
-                    {
-                        case 'd':
-                            Instantiate(fan, new Vector3(-0.5f ,0, (float)char.GetNumericValue(f[1]) + 0.5f),
-                                Quaternion.LookRotation(Vector3.right, Vector3.up));
-                            break;
-                        case 'u':
-                            Instantiate(fan, new Vector3(row + 0.5f ,0, (float)char.GetNumericValue(f[1]) + 0.5f),
-                                Quaternion.LookRotation(Vector3.left, Vector3.up));
-                            break;
-                    }
-                    break;
-                case 'r':
-                    switch (f[2])
-                    {
-                        case 'r':
-                            Instantiate(fan, new Vector3((float)char.GetNumericValue(f[1]) + 0.5f ,0, -0.5f),
-                                Quaternion.LookRotation(Vector3.forward, Vector3.up));
-                            break;
-                        case 'l':
-                            Instantiate(fan, new Vector3((float)char.GetNumericValue(f[1]) + 0.5f ,0, col + 0.5f),
-                                Quaternion.LookRotation(Vector3.back, Vector3.up));
-                            break;
-                    }
-                    break;
-            }
-        }
-
-        for (var i = 0; i != row; i++)
-        {
-            for (var j = 0; j != col; j++)
-            {
-                var boardInstance = Instantiate(board, new Vector3((i + 0.5f), 0, (j + 0.5f)), Quaternion.identity);
-                if (b[i][j] != '.')
-                {
-                    boardInstance.GetComponent<Board>().isPlaced = true;
-                    if (b[i][j] == 's')
-                    {
-                        Instantiate(stone, new Vector3(i + O, 0, j + O), Quaternion.identity);
-                    }
-                    else if (b[i][j] == 'b')
-                    {
-                        Instantiate(barrier, new Vector3(i + O, 0.5f, j + O), Quaternion.identity);
-                    }
-                    else
-                    {
-                        _count++;
-                        var forward = NumToV3(b[i][j]);
-                        var instance = Instantiate(vane, new Vector3(i + O, 0, j + O),
-                            Quaternion.LookRotation(forward, Vector3.up));
-                        instance.GetComponent<Vane>().win = win;
-                    }
-                }
-            }
-        }
     }
 
     private void Update()
@@ -139,6 +57,15 @@ public class GameManager : MonoBehaviour
             {
                 commands.Pop().Undo();
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            foreach (Transform l in level)
+            {
+                Destroy(l.gameObject);
+            }
+            LoadLevel(1);
         }
     }
 
@@ -195,5 +122,140 @@ public class GameManager : MonoBehaviour
             default:
                 return Vector3.zero;
         }
+    }
+
+    private void PlaceFan(List<string> locations)
+    {
+        var fans = new GameObject();
+        fans.transform.parent = level;
+        foreach (var f in locations)
+        {
+            var n = (float) char.GetNumericValue(f[1]);
+            GameObject instance;
+            switch (f[0])
+            {
+                case 'c':
+                    switch (f[2])
+                    {
+                        case 'd':
+                            instance = Instantiate(fan, new Vector3(-0.5f ,0, n + 0.5f),
+                                Quaternion.LookRotation(Vector3.right, Vector3.up));
+                            instance.transform.parent = fans.transform;
+                            break;
+                        case 'u':
+                            instance = Instantiate(fan, new Vector3(row + 0.5f ,0, n + 0.5f),
+                                Quaternion.LookRotation(Vector3.left, Vector3.up));
+                            instance.transform.parent = fans.transform;
+                            break;
+                    }
+                    break;
+                case 'r':
+                    switch (f[2])
+                    {
+                        case 'r':
+                            instance = Instantiate(fan, new Vector3(n + 0.5f ,0, -0.5f),
+                                Quaternion.LookRotation(Vector3.forward, Vector3.up));
+                            instance.transform.parent = fans.transform;
+                            break;
+                        case 'l':
+                            instance = Instantiate(fan, new Vector3(n + 0.5f ,0, col + 0.5f),
+                                Quaternion.LookRotation(Vector3.back, Vector3.up));
+                            instance.transform.parent = fans.transform;
+                            break;
+                    }
+                    break;
+            }
+            
+        }
+    }
+
+    private void PlaceVane(char[][] b)
+    {
+        var boards = new GameObject();
+        boards.name = "Boards";
+        boards.transform.parent = level;
+        var vanes = new GameObject();
+        vanes.name = "Vanes";
+        vanes.transform.parent = level;
+        var items = new GameObject();
+        items.name = "Items";
+        items.transform.parent = level;
+        for (var i = 0; i != row; i++)
+        {
+            for (var j = 0; j != col; j++)
+            {
+                var boardInstance = Instantiate(board, new Vector3((i + 0.5f), 0, (j + 0.5f)),
+                    Quaternion.identity);
+                boardInstance.transform.parent = boards.transform;
+                if (b[i][j] == '.') continue;
+                boardInstance.GetComponent<Board>().isPlaced = true;
+                if (b[i][j] == 's')
+                {
+                    var instance = Instantiate(stone, new Vector3(i + O, 0, j + O), Quaternion.identity);
+                    instance.transform.parent = items.transform;
+                }
+                else if (b[i][j] == 'b')
+                {
+                    var instance = Instantiate(barrier, new Vector3(i + O, 0.5f, j + O), Quaternion.identity);
+                    instance.transform.parent = items.transform;
+                }
+                else
+                {
+                    _count++;
+                    var forward = NumToV3(b[i][j]);
+                    var instance = Instantiate(vane, new Vector3(i + O, 0, j + O),
+                        Quaternion.LookRotation(forward, Vector3.up));
+                    instance.transform.parent = vanes.transform;
+                }
+            }
+        }
+    }
+
+    private string ReadParam(string file)
+    {
+        file = file.Replace("\r", string.Empty);
+        
+        // read plank count
+        _pcount = (int)char.GetNumericValue(file[0]);
+        file = file.Remove(0, 2);
+
+        win = NumToV3(file[0]);
+        file = file.Remove(0, 2);
+        
+        // read wind count
+        _fcount = (int)char.GetNumericValue(file[0]);
+        return file.Remove(0, 2);
+    }
+
+    private void LoadLevel(int l)
+    {
+        winds = new GameObject();
+        winds.name = "Winds";
+        winds.transform.parent = level;
+        planks = new GameObject();
+        planks.name = "Planks";
+        planks.transform.parent = level;
+        
+        string filepath = "Assets/Resources/Levels/level" + l + ".txt";
+        var file = File.ReadAllText(filepath);
+        
+        // read _count, _pcount and _fcount
+        file = ReadParam(file);
+
+        // read fan location
+        var fans = new List<string>();
+        for (var i = 0; i != _fcount; i++)
+        { 
+            fans.Add(file.Substring(0, 4));
+            file = file.Remove(0, 4);
+        }
+
+        // read board
+        var b = file.Split('\n').Select(c => c.ToCharArray()).ToArray();
+        row = b.Length;
+        col = b[0].Length;
+        
+        PlaceFan(fans);
+        PlaceVane(b);
     }
 }

@@ -18,6 +18,7 @@ public class PlacePlankCommand : Command
     public override void Execute()
     {
         _instance = Object.Instantiate(_plank, new Vector3(_x + 0.5f, 0.5f, _y + 0.5f), Quaternion.identity);
+        _instance.transform.parent = _gm.planks.transform;
         _board.isPlaced = true;
         _gm.PlankDec();
     }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8185924600594981581}
   - component: {fileID: 8185924600594981580}
   - component: {fileID: 8185924600594981579}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cylinder (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: -1903117777439842613}
   - component: {fileID: -4235688113807330304}
   - component: {fileID: 8120088627222581264}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Vane
   m_TagString: Vane
   m_Icon: {fileID: 0}
@@ -142,6 +142,7 @@ MonoBehaviour:
   _swing: 0
   low: {x: 0, y: 0, z: 0, w: 0}
   high: {x: 0, y: 0, z: 0, w: 0}
+  win: {x: 0, y: 0, z: 0}
 --- !u!65 &-4235688113807330304
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -181,7 +182,7 @@ GameObject:
   - component: {fileID: 8185924600959143312}
   - component: {fileID: 8185924600959143311}
   - component: {fileID: 8185924600959143310}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
