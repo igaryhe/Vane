@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
     public GameObject vane, fan, plank, board, barrier, stone;
+    public TextMeshProUGUI remains;
     public Transform level;
     public int col, row;
     public Vector3 win;
@@ -39,7 +41,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        ui.SetActive(false);
         LoadLevel(levelNum);
 
     }
@@ -48,9 +49,7 @@ public class GameManager : MonoBehaviour
     {
         if (_count == 0)
         {
-            Debug.Log("You Win!");
             ui.SetActive(true);
-            Time.timeScale = 0f;
         }
 
         if (Input.GetKeyDown(KeyCode.Z))
@@ -63,10 +62,7 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            foreach (Transform l in level)
-            {
-                Destroy(l.gameObject);
-            }
+            DestroyLevel();
             LoadLevel(levelNum);
         }
     }
@@ -84,11 +80,13 @@ public class GameManager : MonoBehaviour
     public void PlankDec()
     {
         _pcount--;
+        remains.text = _pcount.ToString();
     }
 
     public void PlankInc()
     {
         _pcount++;
+        remains.text = _pcount.ToString();
     }
 
     public bool isPcountZero()
@@ -219,6 +217,7 @@ public class GameManager : MonoBehaviour
         
         // read plank count
         _pcount = (int)char.GetNumericValue(file[0]);
+        remains.text = _pcount.ToString();
         file = file.Remove(0, 2);
 
         win = NumToV3(file[0]);
@@ -231,6 +230,7 @@ public class GameManager : MonoBehaviour
 
     private void LoadLevel(int l)
     {
+        ui.SetActive(false);
         winds = new GameObject();
         winds.name = "Winds";
         winds.transform.parent = level;
@@ -260,5 +260,20 @@ public class GameManager : MonoBehaviour
         
         PlaceFan(fans);
         PlaceVane(b);
+    }
+
+    private void DestroyLevel()
+    {
+        foreach (Transform l in level)
+        {
+            Destroy(l.gameObject);
+        }
+    }
+
+    public void NextLevel()
+    {
+        levelNum++;
+        DestroyLevel();
+        LoadLevel(levelNum);
     }
 }
