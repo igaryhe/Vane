@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        levelNum = 1;
         LoadLevel(levelNum);
 
     }
@@ -239,8 +240,7 @@ public class GameManager : MonoBehaviour
         planks.transform.parent = level;
         _count = 0;
         
-        string filepath = "Assets/Resources/Levels/level" + l + ".txt";
-        var file = File.ReadAllText(filepath);
+        var file = Resources.Load<TextAsset>("Levels/level" + l).ToString();
         
         // read _count, _pcount and _fcount
         file = ReadParam(file);
