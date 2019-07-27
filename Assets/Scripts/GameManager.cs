@@ -235,6 +235,7 @@ public class GameManager : MonoBehaviour
         planks = new GameObject();
         planks.name = "Planks";
         planks.transform.parent = level;
+        _count = 0;
         
         string filepath = "Assets/Resources/Levels/level" + l + ".txt";
         var file = File.ReadAllText(filepath);
