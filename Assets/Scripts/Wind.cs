@@ -26,6 +26,7 @@ public class Wind : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Plank"))
         {
+            Debug.Log("Hit!");
             var i = Vector3.Dot(GetComponent<Rigidbody>().velocity.normalized, other.transform.right);
             var right = other.transform.right;
             if (i > 0.1 && i < 0.9)
@@ -77,7 +78,7 @@ public class Wind : MonoBehaviour
             ci.command.affected.Push(rc);
         }
         */
-        else if (other.CompareTag("DeadZone"))
+        else if (other.gameObject.CompareTag("DeadZone"))
         {
             Destroy(gameObject);
         }
