@@ -30,15 +30,15 @@ public class Wind : MonoBehaviour
             var right = other.transform.right;
             if (i > 0.1 && i < 0.9)
             {
-                transform.position = other.transform.position;
                 _rb.velocity = right * speed;
                 transform.forward = right;
+                transform.position = other.transform.position + new Vector3(0.1f, 0f, 0f);
             }
             else if (i < -0.1 && i > -0.9)
             {
-                transform.position = other.transform.position;
                 _rb.velocity = -right * speed;
                 transform.forward = -right;
+                transform.position = other.transform.position - new Vector3(0.1f, 0f, 0f);
             }
             else if (i > -0.1 && i < 0.1)
             {
