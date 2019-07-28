@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using TMPro;
 using UnityEngine;
 
@@ -42,9 +39,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        // levelNum = 1;
-        LoadLevel(levelNum);
-
+        Debug.Log(Application.persistentDataPath);
+        LoadGame();
     }
 
     private void Update()
@@ -66,6 +62,11 @@ public class GameManager : MonoBehaviour
         {
             DestroyLevel();
             LoadLevel(levelNum);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ExitGame();
         }
     }
 
@@ -94,11 +95,6 @@ public class GameManager : MonoBehaviour
     public bool isPcountZero()
     {
         return _pcount == 0;
-    }
-
-    private string Trim(string s)
-    {
-        return s.Remove(0, 1);
     }
 
     private Vector3 NumToV3(char n)
@@ -276,6 +272,18 @@ public class GameManager : MonoBehaviour
     {
         levelNum++;
         DestroyLevel();
+        LoadLevel(levelNum);
+    }
+
+    public void ExitGame()
+    {
+        SaveSystem.Save(levelNum);
+        Application.Quit();
+    }
+
+    public void LoadGame()
+    {
+        levelNum = SaveSystem.Load().level;
         LoadLevel(levelNum);
     }
 }

@@ -18,7 +18,6 @@ public class RotateCommand : Command
     
     public override void Execute()
     {
-        Debug.Log("Rotating");
         coroutine = Rotate(direction);
         gm.StartCoroutine(coroutine);
     }
