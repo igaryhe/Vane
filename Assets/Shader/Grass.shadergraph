@@ -4,7 +4,7 @@
             "typeInfo": {
                 "fullName": "UnityEditor.ShaderGraph.TextureShaderProperty"
             },
-            "JSONnodeData": "{\n    \"m_Name\": \"Main Color\",\n    \"m_GeneratePropertyBlock\": false,\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"02f93aef-fbac-40c6-8fb6-0d995b66cd60\"\n    },\n    \"m_DefaultReferenceName\": \"Texture2D_58652B09\",\n    \"m_OverrideReferenceName\": \"_MainColor\",\n    \"m_Value\": {\n        \"m_SerializedTexture\": \"\",\n        \"m_Guid\": \"\"\n    },\n    \"m_Modifiable\": true,\n    \"m_DefaultType\": 0\n}"
+            "JSONnodeData": "{\n    \"m_Name\": \"Main Color\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"02f93aef-fbac-40c6-8fb6-0d995b66cd60\"\n    },\n    \"m_DefaultReferenceName\": \"Texture2D_58652B09\",\n    \"m_OverrideReferenceName\": \"_MainColor\",\n    \"m_Value\": {\n        \"m_SerializedTexture\": \"\",\n        \"m_Guid\": \"\"\n    },\n    \"m_Modifiable\": true,\n    \"m_DefaultType\": 0\n}"
         },
         {
             "typeInfo": {
