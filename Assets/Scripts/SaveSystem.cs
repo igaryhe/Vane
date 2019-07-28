@@ -19,9 +19,9 @@ public static class SaveSystem
         var path = Application.persistentDataPath + "/level.txt";
         if (File.Exists(path))
         {
-            var fomatter = new BinaryFormatter();
+            var formatter = new BinaryFormatter();
             var stream = new FileStream(path, FileMode.Open);
-            var progress = fomatter.Deserialize(stream) as Progress;
+            var progress = formatter.Deserialize(stream) as Progress;
             stream.Close();
             return progress;
         }

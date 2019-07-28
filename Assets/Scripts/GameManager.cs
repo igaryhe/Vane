@@ -2,6 +2,7 @@
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -66,7 +67,7 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            ExitGame();
+            ReturnToLevelSelector();
         }
     }
 
@@ -275,15 +276,15 @@ public class GameManager : MonoBehaviour
         LoadLevel(levelNum);
     }
 
-    public void ExitGame()
+    public void ReturnToLevelSelector()
     {
         SaveSystem.Save(levelNum);
-        Application.Quit();
+        SceneManager.LoadScene("Selection");
     }
 
     public void LoadGame()
     {
-        levelNum = SaveSystem.Load().level;
+        levelNum = LevelData.currentLevel;
         LoadLevel(levelNum);
     }
 }
