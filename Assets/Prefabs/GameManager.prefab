@@ -47,5 +47,13 @@ MonoBehaviour:
   fan: {fileID: 794033194189785267, guid: 873e75e2f701046809b5ac8a390a5058, type: 3}
   plank: {fileID: 8788796717902752319, guid: 78e7431c2a8f4410aad9c3474b587e5e, type: 3}
   board: {fileID: 9162214357468293788, guid: 6f29a1f75d2c34786bdb554bfe380b55, type: 3}
-  placeable: {fileID: 989705341951940138, guid: 2ca66752113d74244a05a63eb68f14af,
-    type: 3}
+  barrier: {fileID: 0}
+  stone: {fileID: 0}
+  level: {fileID: 0}
+  col: 0
+  row: 0
+  win: {x: 0, y: 0, z: 0}
+  ui: {fileID: 0}
+  winds: {fileID: 0}
+  planks: {fileID: 0}
+  levelNum: 0

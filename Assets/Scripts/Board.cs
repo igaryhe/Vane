@@ -7,13 +7,22 @@ public class Board : MonoBehaviour
     private Vector3 _pos;
     public bool isPlaced;
     private GameManager _gm;
+    private Material grass;
 
     private void Start()
     {
         _mat = GetComponent<Renderer>().material;
+        grass = GetComponentsInChildren<Renderer>()[2].material;
         _color = _mat.color;
         _pos = transform.position;
         _gm = GameManager.Instance;
+        foreach (Transform item in transform)
+        {
+            if (item.CompareTag("Grass"))
+            {
+                item.gameObject.GetComponent<Renderer>().material = grass;
+            }
+        }
     }
 
     private void OnMouseEnter()
