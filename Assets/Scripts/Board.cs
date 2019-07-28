@@ -3,14 +3,17 @@
 public class Board : MonoBehaviour
 {
     private Material _mat;
+    private Renderer _rend;
     private Color _color;
     private Vector3 _pos;
     public bool isPlaced;
     private GameManager _gm;
     private Material grass;
+    private MaterialPropertyBlock block, hover;
 
     private void Start()
     {
+        _rend = GetComponent<Renderer>();
         _mat = GetComponent<Renderer>().material;
         grass = GetComponentsInChildren<Renderer>()[2].material;
         _color = _mat.color;
@@ -23,16 +26,22 @@ public class Board : MonoBehaviour
                 item.gameObject.GetComponent<Renderer>().material = grass;
             }
         }
+        hover = new MaterialPropertyBlock();
+        block = new MaterialPropertyBlock();
+        hover.SetColor("_BaseColor", Color.gray);
+        _rend.GetPropertyBlock(block);
     }
 
     private void OnMouseEnter()
     {
-        _mat.color = Color.gray;
+        // _mat.color = Color.gray;
+        _rend.SetPropertyBlock(hover);
     }
 
     private void OnMouseExit()
     {
-        _mat.color = _color;
+        // _mat.color = _color;
+        _rend.SetPropertyBlock(block);
     }
 
     private void OnMouseDown()
