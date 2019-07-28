@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
     public GameObject vane, fan, plank, board, barrier, stone;
+    public TextMeshProUGUI remains;
     public Transform level;
     public int col, row;
     public Vector3 win;
@@ -16,6 +18,7 @@ public class GameManager : MonoBehaviour
     public GameObject ui;
     public GameObject winds, planks;
     public int levelNum;
+    public CameraRotator cr;
     
     private const float O = 0.5f;
     private int _count;
@@ -39,7 +42,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        ui.SetActive(false);
+        // levelNum = 1;
         LoadLevel(levelNum);
 
     }
@@ -48,9 +51,7 @@ public class GameManager : MonoBehaviour
     {
         if (_count == 0)
         {
-            Debug.Log("You Win!");
             ui.SetActive(true);
-            Time.timeScale = 0f;
         }
 
         if (Input.GetKeyDown(KeyCode.Z))
@@ -63,10 +64,7 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            foreach (Transform l in level)
-            {
-                Destroy(l.gameObject);
-            }
+            DestroyLevel();
             LoadLevel(levelNum);
         }
     }
@@ -84,11 +82,13 @@ public class GameManager : MonoBehaviour
     public void PlankDec()
     {
         _pcount--;
+        remains.text = _pcount.ToString();
     }
 
     public void PlankInc()
     {
         _pcount++;
+        remains.text = _pcount.ToString();
     }
 
     public bool isPcountZero()
@@ -219,6 +219,7 @@ public class GameManager : MonoBehaviour
         
         // read plank count
         _pcount = (int)char.GetNumericValue(file[0]);
+        remains.text = _pcount.ToString();
         file = file.Remove(0, 2);
 
         win = NumToV3(file[0]);
@@ -231,6 +232,7 @@ public class GameManager : MonoBehaviour
 
     private void LoadLevel(int l)
     {
+        ui.SetActive(false);
         winds = new GameObject();
         winds.name = "Winds";
         winds.transform.parent = level;
@@ -239,8 +241,7 @@ public class GameManager : MonoBehaviour
         planks.transform.parent = level;
         _count = 0;
         
-        string filepath = "Assets/Resources/Levels/level" + l + ".txt";
-        var file = File.ReadAllText(filepath);
+        var file = Resources.Load<TextAsset>("Levels/level" + l).ToString();
         
         // read _count, _pcount and _fcount
         file = ReadParam(file);
@@ -257,8 +258,24 @@ public class GameManager : MonoBehaviour
         var b = file.Split('\n').Select(c => c.ToCharArray()).ToArray();
         row = b.Length;
         col = b[0].Length;
+        cr.transform.position = new Vector3(row / 2f, 0, col / 2f);
         
         PlaceFan(fans);
         PlaceVane(b);
+    }
+
+    private void DestroyLevel()
+    {
+        foreach (Transform l in level)
+        {
+            Destroy(l.gameObject);
+        }
+    }
+
+    public void NextLevel()
+    {
+        levelNum++;
+        DestroyLevel();
+        LoadLevel(levelNum);
     }
 }
