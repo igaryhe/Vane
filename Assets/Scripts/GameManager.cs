@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public GameObject ui;
     public GameObject winds, planks;
     public int levelNum;
+    public CameraRotator cr;
     
     private const float O = 0.5f;
     private int _count;
@@ -41,7 +42,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        levelNum = 1;
+        // levelNum = 1;
         LoadLevel(levelNum);
 
     }
@@ -257,6 +258,7 @@ public class GameManager : MonoBehaviour
         var b = file.Split('\n').Select(c => c.ToCharArray()).ToArray();
         row = b.Length;
         col = b[0].Length;
+        cr.transform.position = new Vector3(row / 2f, 0, col / 2f);
         
         PlaceFan(fans);
         PlaceVane(b);
