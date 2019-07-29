@@ -10,7 +10,7 @@ public class Vane : MonoBehaviour
     private Vector3 lastDir;
     private RotateCommand rc;
     public bool _swing;
-    public Quaternion low, high;
+    public Quaternion first, second;
     private bool clockWise;
     private float t;
 
@@ -40,20 +40,25 @@ public class Vane : MonoBehaviour
         // TODO: Make it swing
         if (_swing)
         {
-            if (transform.rotation == low || transform.rotation == high)
+            if (transform.rotation == first)
             {
-                clockWise = !clockWise;
+                clockWise = true;
+                t = 0;
+            }
+            else if (transform.rotation == second)
+            {
+                clockWise = false;
                 t = 0;
             }
 
             t += Time.deltaTime;
             if (clockWise)
             {
-                transform.rotation = Quaternion.Slerp(transform.rotation, high, t);
+                transform.rotation = Quaternion.Slerp(transform.rotation, second, t);
             }
             else
             {
-                transform.rotation = Quaternion.Slerp(transform.rotation, low, t);
+                transform.rotation = Quaternion.Slerp(transform.rotation, first, t);
             }
         }
     }
@@ -85,8 +90,8 @@ public class Vane : MonoBehaviour
                 else
                 {
                     // rc.Stop();
-                    low = Quaternion.LookRotation(rc.direction, Vector3.up);
-                    high = Quaternion.LookRotation(other.transform.forward, Vector3.up);
+                    first = Quaternion.LookRotation(rc.direction, Vector3.up);
+                    second = Quaternion.LookRotation(other.transform.forward, Vector3.up);
                     rc = new RotateCommand(transform, other.transform.forward);
                     // rc.Execute();
                     _swing = true;
