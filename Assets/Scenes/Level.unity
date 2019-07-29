@@ -1498,6 +1498,49 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3549814842060993588, guid: 1d3a5b03a94f849e68eb10a101cd0bd9,
+        type: 3}
+      propertyPath: stone
+      value: 
+      objectReference: {fileID: 5158370717976609893, guid: 7babc1ec5cbd34991b92db8ce0204976,
+        type: 3}
+    - target: {fileID: 3549814842060993588, guid: 1d3a5b03a94f849e68eb10a101cd0bd9,
+        type: 3}
+      propertyPath: barrier
+      value: 
+      objectReference: {fileID: 6858268766090071058, guid: b550359a4e00943aebad80117e1019c1,
+        type: 3}
+    - target: {fileID: 3549814842060993588, guid: 1d3a5b03a94f849e68eb10a101cd0bd9,
+        type: 3}
+      propertyPath: ui
+      value: 
+      objectReference: {fileID: 1027067648}
+    - target: {fileID: 3549814842060993588, guid: 1d3a5b03a94f849e68eb10a101cd0bd9,
+        type: 3}
+      propertyPath: level
+      value: 
+      objectReference: {fileID: 5507622}
+    - target: {fileID: 3549814842060993588, guid: 1d3a5b03a94f849e68eb10a101cd0bd9,
+        type: 3}
+      propertyPath: levelNum
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3549814842060993588, guid: 1d3a5b03a94f849e68eb10a101cd0bd9,
+        type: 3}
+      propertyPath: remains
+      value: 
+      objectReference: {fileID: 1417727732}
+    - target: {fileID: 3549814842060993588, guid: 1d3a5b03a94f849e68eb10a101cd0bd9,
+        type: 3}
+      propertyPath: cr
+      value: 
+      objectReference: {fileID: 539264898}
+    - target: {fileID: 3549814842060993588, guid: 1d3a5b03a94f849e68eb10a101cd0bd9,
+        type: 3}
+      propertyPath: plank
+      value: 
+      objectReference: {fileID: 3245186755800581700, guid: 5b2c75b6501c8b7459020c47da5bc56c,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d3a5b03a94f849e68eb10a101cd0bd9, type: 3}
 --- !u!1 &1998115678

@@ -11,6 +11,7 @@ TagManager:
   - Stone
   - Barrier
   - Grass
+  - Fan
   layers:
   - Default
   - TransparentFX
