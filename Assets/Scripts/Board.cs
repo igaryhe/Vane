@@ -15,7 +15,7 @@ public class Board : MonoBehaviour
     {
         _rend = GetComponent<Renderer>();
         _mat = GetComponent<Renderer>().material;
-        grass = GetComponentsInChildren<Renderer>()[2].material;
+        grass = GetComponentsInChildren<Renderer>()[1].material;
         _color = _mat.color;
         _pos = transform.position;
         _gm = GameManager.Instance;
