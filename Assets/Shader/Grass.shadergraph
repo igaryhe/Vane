@@ -4,13 +4,13 @@
             "typeInfo": {
                 "fullName": "UnityEditor.ShaderGraph.TextureShaderProperty"
             },
-            "JSONnodeData": "{\n    \"m_Name\": \"Main Color\",\n    \"m_GeneratePropertyBlock\": false,\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"02f93aef-fbac-40c6-8fb6-0d995b66cd60\"\n    },\n    \"m_DefaultReferenceName\": \"Texture2D_58652B09\",\n    \"m_OverrideReferenceName\": \"_MainColor\",\n    \"m_Value\": {\n        \"m_SerializedTexture\": \"\",\n        \"m_Guid\": \"\"\n    },\n    \"m_Modifiable\": true,\n    \"m_DefaultType\": 0\n}"
+            "JSONnodeData": "{\n    \"m_Name\": \"Main Color\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"02f93aef-fbac-40c6-8fb6-0d995b66cd60\"\n    },\n    \"m_DefaultReferenceName\": \"Texture2D_58652B09\",\n    \"m_OverrideReferenceName\": \"_MainColor\",\n    \"m_Value\": {\n        \"m_SerializedTexture\": \"\",\n        \"m_Guid\": \"\"\n    },\n    \"m_Modifiable\": true,\n    \"m_DefaultType\": 0\n}"
         },
         {
             "typeInfo": {
                 "fullName": "UnityEditor.ShaderGraph.ColorShaderProperty"
             },
-            "JSONnodeData": "{\n    \"m_Name\": \"Color\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"6e74698f-cbfe-47fe-9cf1-527eee0b3931\"\n    },\n    \"m_DefaultReferenceName\": \"Color_37785968\",\n    \"m_OverrideReferenceName\": \"_Color\",\n    \"m_Value\": {\n        \"r\": 0.0,\n        \"g\": 0.0,\n        \"b\": 0.0,\n        \"a\": 0.0\n    },\n    \"m_ColorMode\": 0,\n    \"m_Hidden\": false\n}"
+            "JSONnodeData": "{\n    \"m_Name\": \"Color\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"6e74698f-cbfe-47fe-9cf1-527eee0b3931\"\n    },\n    \"m_DefaultReferenceName\": \"Color_37785968\",\n    \"m_OverrideReferenceName\": \"_Color\",\n    \"m_Value\": {\n        \"r\": 0.3066037893295288,\n        \"g\": 1.0,\n        \"b\": 0.31147903203964236,\n        \"a\": 0.0\n    },\n    \"m_ColorMode\": 0,\n    \"m_Hidden\": false\n}"
         },
         {
             "typeInfo": {
