@@ -94,7 +94,6 @@ public class Board : MonoBehaviour
             grass.SetVector("_WindDir", Vector3.Lerp(lastDirection, windDirection, i));
             grass.SetFloat("_WindSpd", Mathf.Lerp(0.1f, 1f, Vector3.Lerp(lastDirection.normalized, windDirection.normalized, i).magnitude));
         }
-        Debug.Log(windDirection);
         i += Time.deltaTime * 3;
     }
 }
