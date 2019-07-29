@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class LevelSelector : MonoBehaviour
 {
     public Button[] buttons;
-    private const int count = 12;
+    private const int count = 14;
     private const int col = 6;
     public Button btn;
     public GameObject content;
@@ -25,7 +25,7 @@ public class LevelSelector : MonoBehaviour
             b.onClick.AddListener(delegate { LoadLevel(tmp + 1); });
             if (i >= LevelData.progress)
             {
-                b.interactable = !b.interactable;
+                // b.interactable = !b.interactable;
             }
             
         }
