@@ -69,7 +69,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_E38114CD: 1
+    - Vector1_E38114CD: 5.01
     - Vector1_E65C63A4: 1
     - _AlphaClip: 0
     - _Blend: 0
@@ -91,7 +91,7 @@ Material:
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _Speed: 1
+    - _Speed: 1.39
     - _SrcBlend: 1
     - _Surface: 0
     - _UVSec: 0
