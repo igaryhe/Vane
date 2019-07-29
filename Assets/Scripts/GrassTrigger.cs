@@ -4,15 +4,31 @@ using UnityEngine;
 
 public class GrassTrigger : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Vector3 windDir;
+    private float i = 0;
+    private Collider lastCol;
+    private Collider currentCol;
+
+    private void Start()
     {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if(i < 0f)
+        {
+            windDir = Vector3.zero;
+        }
+        i -= Time.deltaTime;
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Wind"))
+        {
+            i = 1f;
+            windDir = other.transform.right;
+        }
+    }
+
 }
