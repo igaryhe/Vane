@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7216857212937835718}
   - component: {fileID: 7216857212937835715}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: DeadZone1
   m_TagString: DeadZone
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7216857213409094833}
   - component: {fileID: 7216857213409094834}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: DeadZone3
   m_TagString: DeadZone
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7216857213688352332}
   - component: {fileID: 7216857213688352329}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: DeadZone2
   m_TagString: DeadZone
   m_Icon: {fileID: 0}
@@ -142,7 +142,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7216857214140373564}
   - component: {fileID: 7216857214140373561}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: DeadZone4
   m_TagString: DeadZone
   m_Icon: {fileID: 0}
@@ -185,7 +185,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7216857214617122302}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: DeadZone
   m_TagString: DeadZone
   m_Icon: {fileID: 0}
