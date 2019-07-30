@@ -26,7 +26,7 @@ public class LevelSelector : MonoBehaviour
             b.onClick.AddListener(delegate { LoadLevel(tmp + 1); });
             if (i >= LevelData.progress)
             {
-                // b.interactable = !b.interactable;
+                b.interactable = !b.interactable;
             }
             
         }
