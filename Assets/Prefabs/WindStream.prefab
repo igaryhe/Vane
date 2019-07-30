@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4793901600122873940}
   - component: {fileID: 512258445464924192}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: WindPartical
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,7 +158,7 @@ GameObject:
   - component: {fileID: -3646435410493020939}
   - component: {fileID: 1272347963}
   - component: {fileID: 1272347964}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: WindStream
   m_TagString: Wind
   m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
