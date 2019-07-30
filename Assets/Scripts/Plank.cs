@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Plank : MonoBehaviour, CommandInterface
 {
@@ -17,6 +18,7 @@ public class Plank : MonoBehaviour, CommandInterface
     }
     private void OnMouseEnter()
     {
+        if (EventSystem.current.IsPointerOverGameObject()) return;
         for (int i = 0; i < _rend.Length; i++)
         {
             _rend[i].SetPropertyBlock(hover);
@@ -25,6 +27,7 @@ public class Plank : MonoBehaviour, CommandInterface
     }
     private void OnMouseExit()
     {
+        if (EventSystem.current.IsPointerOverGameObject()) return;
         for (int i = 0; i < _rend.Length; i++)
         {
             _rend[i].SetPropertyBlock(block);
@@ -33,6 +36,7 @@ public class Plank : MonoBehaviour, CommandInterface
     }
     private void OnMouseDown()
     {
+        if (EventSystem.current.IsPointerOverGameObject()) return;
         var rpc = new RotatePlankCommand(transform);
         rpc.Execute();
         GameManager.Instance.commands.Push(rpc);

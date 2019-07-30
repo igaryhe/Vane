@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -12,11 +13,18 @@ public class CameraRotator : MonoBehaviour
     private float maxSize = 7.5f;
     private readonly float _overTime = .5f;
     private bool _running;
+    private GameManager _gm;
+
+    private void Start()
+    {
+        _gm = GameManager.Instance;
+    }
 
 
     // Update is called once per frame
     void Update()
     {
+        if (_gm._count == 0) return;
         if (Input.GetAxis("Mouse ScrollWheel") < 0 && Camera.main.orthographicSize < maxSize)
         {
             Camera.main.orthographicSize += 0.5f;

@@ -7,6 +7,7 @@ public class RotateCommand : Command
     private readonly Vector3 _prevDirection;
     private readonly float _overTime = 3f;
     private GameManager gm = GameManager.Instance;
+    private AudioManager am = AudioManager.Instance;
     private IEnumerator coroutine;
 
     public RotateCommand(Transform transform, Vector3 direction)
@@ -20,6 +21,7 @@ public class RotateCommand : Command
     {
         coroutine = Rotate(direction);
         gm.StartCoroutine(coroutine);
+        am.Play("rotate");
     }
 
     public override void Undo()

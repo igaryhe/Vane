@@ -17,11 +17,12 @@ public class GameManager : MonoBehaviour
     public GameObject winds, planks;
     public int levelNum;
     public CameraRotator cr;
-    
+
     private const float O = 0.5f;
-    private int _count;
-    private int _pcount;
+    public int _count;
+    private int _pcount, _pmax;
     private int _fcount;
+    private AudioManager _am;
 
     public static GameManager Instance
     {
@@ -41,31 +42,37 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         LoadGame();
+        _am = AudioManager.Instance;
     }
 
     private void Update()
     {
         if (_count == 0)
         {
+            _am.Play("crow");
             ui.SetActive(true);
         }
-
-        if (Input.GetKeyDown(KeyCode.Z))
+        else
         {
-            if (commands.Count > 0)
+            /*
+            if (Input.GetKeyDown(KeyCode.Z))
             {
-                commands.Pop().Undo();
+                if (commands.Count > 0)
+                {
+                    commands.Pop().Undo();
+                }
             }
-        }
+            */
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            Reset();
-        }
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                Reset();
+            }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            ReturnToLevelSelector();
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                ReturnToLevelSelector();
+            }
         }
     }
 
@@ -82,13 +89,13 @@ public class GameManager : MonoBehaviour
     public void PlankDec()
     {
         _pcount--;
-        remains.text = _pcount.ToString();
+        remains.text = _pcount + "/" + _pmax;;
     }
 
     public void PlankInc()
     {
         _pcount++;
-        remains.text = _pcount.ToString();
+        remains.text = _pcount + "/" + _pmax;
     }
 
     public bool isPcountZero()
@@ -214,7 +221,8 @@ public class GameManager : MonoBehaviour
         
         // read plank count
         _pcount = (int)char.GetNumericValue(file[0]);
-        remains.text = _pcount.ToString();
+        _pmax = _pcount;
+        remains.text = _pcount + "/" + _pmax;
         file = file.Remove(0, 2);
 
         win = NumToV3(file[0]);
@@ -271,6 +279,7 @@ public class GameManager : MonoBehaviour
     {
         levelNum++;
         DestroyLevel();
+        // level.gameObject.SetActive(true);
         LoadLevel(levelNum);
     }
 

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Board : MonoBehaviour
 {
@@ -43,17 +44,20 @@ public class Board : MonoBehaviour
     private void OnMouseEnter()
     {
         // _mat.color = Color.gray;
+        if (EventSystem.current.IsPointerOverGameObject()) return;
         _rend.SetPropertyBlock(hover);
     }
 
     private void OnMouseExit()
     {
         // _mat.color = _color;
+        if (EventSystem.current.IsPointerOverGameObject()) return;
         _rend.SetPropertyBlock(block);
     }
 
     private void OnMouseDown()
     {
+        if (EventSystem.current.IsPointerOverGameObject()) return;
         if (!isPlaced)
         {
             if (_pos.x < 0f && _pos.z < 0f ||
