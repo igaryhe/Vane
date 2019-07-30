@@ -32,16 +32,17 @@ public class Wind : MonoBehaviour
             {
                 _rb.velocity = right * speed;
                 transform.forward = right;
-                transform.position = other.transform.position + new Vector3(0.1f, 0f, 0f);
+                transform.position = other.transform.position + new Vector3(0.15f, 0f, 0f);
             }
             else if (i < -0.1 && i > -0.9)
             {
                 _rb.velocity = -right * speed;
                 transform.forward = -right;
-                transform.position = other.transform.position - new Vector3(0.1f, 0f, 0f);
+                transform.position = other.transform.position - new Vector3(0.15f, 0f, 0f);
             }
             else if (i > -0.1 && i < 0.1)
             {
+                //other.GetComponent<Collider>().enabled = false;
                 _rb.velocity = Vector3.zero;
                 var vel = windPS.velocityOverLifetime;
                 vel.x = new ParticleSystem.MinMaxCurve(1, antiRotCurveX, rotCurveX);
@@ -55,6 +56,7 @@ public class Wind : MonoBehaviour
         else if (other.gameObject.CompareTag("Wind"))
         {
             var i = Vector3.Dot(gameObject.GetComponent<Rigidbody>().velocity.normalized, other.transform.forward);
+            //other.GetComponent<Collider>().enabled = false;
             //transform.position = other.transform.position;
             if (i < -0.9 && i > -1.1)
             {
