@@ -42,16 +42,16 @@ public class CameraRotator : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             if (_running) return;
-            StartCoroutine(Rotate(90));
+            StartCoroutine(Rotate(45));
             // transform.Rotate(Vector3.up, 90, Space.World);
-            angleOffset -= 90;
+            angleOffset -= 45;
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (_running) return;
-            StartCoroutine(Rotate(-90));
+            StartCoroutine(Rotate(-45));
             // transform.Rotate(Vector3.up, -90, Space.World);
-            angleOffset += 90;
+            angleOffset += 45;
         }
     }
     
