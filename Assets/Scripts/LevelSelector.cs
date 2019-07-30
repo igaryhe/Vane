@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class LevelSelector : MonoBehaviour
 {
     public Button[] buttons;
-    private const int count = 14;
+    private const int count = 16;
     private const int col = 6;
     public Button btn;
     public GameObject content;
