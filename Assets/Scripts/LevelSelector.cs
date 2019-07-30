@@ -5,14 +5,15 @@ using UnityEngine.UI;
 
 public class LevelSelector : MonoBehaviour
 {
-    public Button[] buttons;
-    private const int count = 14;
+    private int count;
     private const int col = 6;
     public Button btn;
     public GameObject content;
 
     private void Start()
     {
+        var levels = Resources.LoadAll("Levels");
+        count = levels.Length - 1;
         var progress = SaveSystem.Load();
         LevelData.progress = progress.level;
         for (var i = 0; i != count; i++)

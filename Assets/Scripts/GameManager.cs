@@ -40,7 +40,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log(Application.persistentDataPath);
         LoadGame();
     }
 
