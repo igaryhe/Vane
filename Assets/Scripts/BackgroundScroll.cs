@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BackgroundScroll : MonoBehaviour
 {
-    private float speed = -0.05f;
+    private float speed = -0.02f;
 
     private Material _mat;
     // Start is called before the first frame update
