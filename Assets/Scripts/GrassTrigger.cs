@@ -19,7 +19,7 @@ public class GrassTrigger : MonoBehaviour
         {
             windDir = Vector3.zero;
         }
-        i -= Time.deltaTime * 2f;
+        i -= Time.deltaTime * 1f;
     }
 
     private void OnTriggerExit(Collider other)
