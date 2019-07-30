@@ -20,13 +20,13 @@ public class LevelSelector : MonoBehaviour
         {
             var b = Instantiate(btn);
             b.GetComponent<Transform>().SetParent(content.transform, false);
-            b.GetComponent<RectTransform>().localPosition = new Vector3(50 + 100 * (i % 6), -50 - 100 * (i / 6));
+            b.GetComponent<RectTransform>().localPosition = new Vector3(50 + 100 * (i % col), -50 - 100 * (i / col));
             b.GetComponentInChildren<TextMeshProUGUI>().text = (i + 1).ToString();
             var tmp = i;
             b.onClick.AddListener(delegate { LoadLevel(tmp + 1); });
             if (i >= LevelData.progress)
             {
-                // b.interactable = !b.interactable;
+                b.interactable = !b.interactable;
             }
             
         }

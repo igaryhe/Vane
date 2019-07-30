@@ -60,8 +60,7 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            DestroyLevel();
-            LoadLevel(levelNum);
+            Reset();
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -277,13 +276,20 @@ public class GameManager : MonoBehaviour
 
     public void ReturnToLevelSelector()
     {
-        SaveSystem.Save(levelNum);
+        if (levelNum >= LevelData.progress)
+            SaveSystem.Save(levelNum);
         SceneManager.LoadScene("Selection");
     }
 
     public void LoadGame()
     {
         levelNum = LevelData.currentLevel;
+        LoadLevel(levelNum);
+    }
+
+    public void Reset()
+    {
+        DestroyLevel();
         LoadLevel(levelNum);
     }
 }
