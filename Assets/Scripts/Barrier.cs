@@ -15,7 +15,7 @@ public class Barrier : MonoBehaviour
 
     private void Start()
     {
-        grass = GetComponentsInChildren<Renderer>()[1].material;
+        grass = GetComponentInChildren<Renderer>().material;
     }
 
     private void Update()
