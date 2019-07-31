@@ -7,7 +7,7 @@ public class Celebrate : MonoBehaviour
     private float i;
     void Start()
     {
-        i = -Random.Range(0,500);
+        i = -Random.Range(100,250);
     }
 
     // Update is called once per frame
