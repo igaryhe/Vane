@@ -7,14 +7,17 @@ public class Celebrate : MonoBehaviour
     private float i;
     void Start()
     {
-        i = 0;
+        i = -Random.Range(0,500);
     }
 
     // Update is called once per frame
     void Update()
     {
         i += Time.deltaTime * 500f;
-        transform.GetComponentInChildren<SkinnedMeshRenderer>().SetBlendShapeWeight(0, Mathf.PingPong(i,100));
+        if(i > 0)
+        {
+            transform.GetComponentInChildren<SkinnedMeshRenderer>().SetBlendShapeWeight(0, Mathf.PingPong(i,100));
+        }
     }
 
     private void OnDisable()
