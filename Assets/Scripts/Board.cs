@@ -37,7 +37,8 @@ public class Board : MonoBehaviour
         }
         hover = new MaterialPropertyBlock();
         block = new MaterialPropertyBlock();
-        hover.SetColor("_BaseColor", Color.gray);
+        var green = new Color32(120, 157, 130, 255);
+        hover.SetColor("_BaseColor", green);
         _rend.GetPropertyBlock(block);
     }
 

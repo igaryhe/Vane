@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         LoadGame();
+        am.Play("wind");
         plankList = new List<Transform>();
     }
 
