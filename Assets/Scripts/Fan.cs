@@ -1,17 +1,12 @@
 ﻿using System;
 using UnityEngine;
 
-public class Fan : MonoBehaviour, CommandInterface
+public class Fan : MonoBehaviour
 {
     public GameObject windParticle;
     private float i;
     private GameManager _gm;
     public Command command { get; set; }
-    /*
-    public GameObject ball;
-    private const float speed = 2f;
-    */
-    
     private void Start()
     {
         _gm = GameManager.Instance;

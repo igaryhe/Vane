@@ -68,7 +68,7 @@ public class Board : MonoBehaviour
             {
                 var pfc = new PlaceFanCommand((int) (_pos.x - 0.5), (int) (_pos.z - 0.5), this);
                 pfc.Execute();
-                _gm.commands.Push(pfc);
+                _gm.commands.Add(pfc);
             }
             else
             {
@@ -76,7 +76,7 @@ public class Board : MonoBehaviour
                 {
                     var ppc = new PlacePlankCommand((int) (_pos.x), (int) (_pos.z), this);
                     ppc.Execute();
-                    _gm.commands.Push(ppc);
+                    _gm.commands.Add(ppc);
                 }
             }
         }
