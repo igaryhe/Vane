@@ -41,7 +41,7 @@ public class Board : MonoBehaviour
         _rend.GetPropertyBlock(block);
     }
 
-    private void OnMouseOver()
+    private void OnMouseEnter()
     {
         // _mat.color = Color.gray;
         if (EventSystem.current.IsPointerOverGameObject()) return;
