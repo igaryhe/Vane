@@ -64,6 +64,10 @@ public class GameManager : MonoBehaviour
             {
                 am.Play("crow");
                 _isPlayed = !_isPlayed;
+                foreach (var v in _vanes)
+                {
+                    v.tr.gameObject.GetComponent<Celebrate>().enabled = true;
+                }
             }
             ui.SetActive(true);
         }
