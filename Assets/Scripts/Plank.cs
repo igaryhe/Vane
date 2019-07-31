@@ -39,7 +39,7 @@ public class Plank : MonoBehaviour, CommandInterface
         if (EventSystem.current.IsPointerOverGameObject()) return;
         var rpc = new RotatePlankCommand(transform);
         rpc.Execute();
-        GameManager.Instance.commands.Push(rpc);
+        // GameManager.Instance.commands.Push(rpc);
         foreach (Transform item in transform.parent)
         {
             if (item.CompareTag("Fan"))

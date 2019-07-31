@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -54,19 +55,15 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            /*
             if (Input.GetKeyDown(KeyCode.Z))
             {
-                if (commands.Count > 0)
-                {
-                    commands.Pop().Undo();
-                }
+                Undo();
             }
-            */
 
             if (Input.GetKeyDown(KeyCode.R))
             {
                 Reset();
+                commands = new Stack<Command>();
             }
 
             if (Input.GetKeyDown(KeyCode.Escape))
@@ -300,5 +297,18 @@ public class GameManager : MonoBehaviour
     {
         DestroyLevel();
         LoadLevel(levelNum);
+    }
+
+    public void Undo()
+    {
+        if (commands.Count > 0)
+        {
+            commands.Pop();
+            Reset();
+            foreach (var c in commands)
+            {
+                c.Execute();
+            }
+        }
     }
 }
