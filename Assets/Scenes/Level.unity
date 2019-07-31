@@ -97,7 +97,7 @@ LightmapSettings:
     m_ShowResolutionOverlay: 1
     m_ExportTrainingData: 0
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -364,7 +364,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: ad75e928e3b68447680717f77f55bbf8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 84dce5c474f9544cfa6505a402c136d5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -456,11 +456,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: rotate
-    clip: {fileID: 8300000, guid: ee75df421f422481d809f95f51eb2683, type: 3}
+    clip: {fileID: 8300000, guid: b6f6e3deb30f64d80a2394d187042b38, type: 3}
     pitch: 1
     source: {fileID: 0}
   - name: crow
     clip: {fileID: 8300000, guid: 5bd1aa5ecf7734b45848aba75acb64fb, type: 3}
+    pitch: 1
+    source: {fileID: 0}
+  - name: wind
+    clip: {fileID: 8300000, guid: 8f86fef82874540c5827dc634e654222, type: 3}
+    pitch: 1
+    source: {fileID: 0}
+  - name: j
+    clip: {fileID: 8300000, guid: db520a2aae31f464384b9013e7be4231, type: 3}
     pitch: 1
     source: {fileID: 0}
 --- !u!4 &605315452

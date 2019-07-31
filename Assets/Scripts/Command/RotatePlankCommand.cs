@@ -18,6 +18,7 @@ public class RotatePlankCommand : Command
     public override void Execute()
     {
         // var _transform = _gm.plankList[_seq];
+        _gm.am.Play("j");
         foreach (Transform item in _transform)
         {
             if (item.CompareTag("Fan"))

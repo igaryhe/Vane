@@ -11,7 +11,8 @@ public class Plank : MonoBehaviour
         _rend = transform.GetComponentsInChildren<Renderer>();
         hover = new MaterialPropertyBlock();
         block = new MaterialPropertyBlock();
-        hover.SetColor("_BaseColor", Color.yellow);
+        var orange = new Color32(255, 208, 102, 255);
+        hover.SetColor("_BaseColor", orange);
         foreach (var t in _rend)
         {
             t.GetPropertyBlock(block);
