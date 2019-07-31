@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,14 +11,22 @@ public class GameManager : MonoBehaviour
     public GameObject[] board;
     public TextMeshProUGUI remains;
     public Transform level;
+    [HideInInspector]
     public int col, row;
+    [HideInInspector]
     public Vector3 win;
+    [HideInInspector]
     public List<Command> commands = new List<Command>();
     public GameObject ui;
+    [HideInInspector]
     public GameObject winds, planks;
+    [HideInInspector]
     public int levelNum;
     public CameraRotator cr;
+    [HideInInspector]
     public List<Transform> plankList;
+
+    private List<VaneData> _vanes;
 
     private const float O = 0.5f;
     public int _count;
@@ -53,7 +60,6 @@ public class GameManager : MonoBehaviour
         if (_count == 0)
         {
             am.Play("crow");
-            //_am.Play("crow");
             ui.SetActive(true);
         }
         else
@@ -188,28 +194,38 @@ public class GameManager : MonoBehaviour
         {
             for (var j = 0; j != col; j++)
             {
-                var boardInstance = Instantiate(board[Mathf.RoundToInt(Random.Range(0,board.Length))], new Vector3((i + 0.5f), 0, (j + 0.5f)),
-                    Quaternion.identity);
+                var boardInstance = Instantiate(board[Mathf.RoundToInt(Random.Range(0,board.Length))],
+                    new Vector3((i + 0.5f), 0, (j + 0.5f)), Quaternion.identity);
                 boardInstance.transform.parent = boards.transform;
                 if (b[i][j] == '.') continue;
-                boardInstance.GetComponent<Board>().isPlaced = true;
+                var boardCompoment = boardInstance.GetComponent<Board>();
+                boardCompoment.isPlaced = true;
                 if (b[i][j] == 's')
                 {
                     var instance = Instantiate(stone, new Vector3(i + O, 0, j + O), Quaternion.identity);
                     instance.transform.parent = items.transform;
+                    foreach (Transform item in boardInstance.transform)
+                    {
+                        if (item.CompareTag("Grass")) Destroy(item.gameObject);
+                    }
                 }
                 else if (b[i][j] == 'b')
                 {
                     var instance = Instantiate(barrier, new Vector3(i + O, 0.5f, j + O), Quaternion.identity);
                     instance.transform.parent = items.transform;
+                    foreach (Transform item in boardInstance.transform)
+                    {
+                        if (item.CompareTag("Grass")) Destroy(item.gameObject);
+                    }
                 }
                 else
                 {
                     _count++;
                     var forward = NumToV3(b[i][j]);
-                    var instance = Instantiate(vane, new Vector3(i + O, 0, j + O),
-                        Quaternion.LookRotation(forward, Vector3.up));
+                    var rotation = Quaternion.LookRotation(forward, Vector3.up);
+                    var instance = Instantiate(vane, new Vector3(i + O, 0, j + O), rotation);
                     instance.transform.parent = vanes.transform;
+                    _vanes.Add(new VaneData(instance.transform, forward));
                 }
             }
         }
@@ -236,6 +252,7 @@ public class GameManager : MonoBehaviour
     private void LoadLevel(int l)
     {
         // plankList = new List<Transform>();
+        _vanes = new List<VaneData>();
         ui.SetActive(false);
         winds = new GameObject();
         winds.name = "Winds";
@@ -263,8 +280,7 @@ public class GameManager : MonoBehaviour
         var b = file.Split('\n').Select(c => c.ToCharArray()).ToArray();
         row = b.Length;
         col = b[0].Length;
-        cr.transform.position = new Vector3(row / 2f, 0, col / 2f);
-        
+
         PlaceFan(fans);
         PlaceVane(b);
     }
@@ -296,6 +312,7 @@ public class GameManager : MonoBehaviour
     {
         levelNum = LevelData.currentLevel;
         LoadLevel(levelNum);
+        cr.transform.position = new Vector3(row / 2f, 0, col / 2f);
     }
 
     public void Reset()
@@ -308,12 +325,28 @@ public class GameManager : MonoBehaviour
     {
         if (commands.Count > 0)
         {
+            commands[commands.Count - 1].Undo();
             commands.RemoveAt(commands.Count - 1);
-            Reset();
-            foreach (var c in commands)
-            {
-                c.Execute();
-            }
+            // Reset();
+            // foreach (var c in commands)
+            // {
+            //     c.Execute();
+            // }
+            ResetRotation();
+        }
+    }
+
+    private void ResetRotation()
+    {
+        foreach (Transform w in winds.transform)
+        {
+            Destroy(w.gameObject);
+        }
+        foreach (var v in _vanes)
+        {
+            var vane = v.tr.gameObject.GetComponent<Vane>();
+            vane.ResetDirection();
+            v.Rotate();
         }
     }
 }

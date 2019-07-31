@@ -37,7 +37,7 @@ public class Plank : MonoBehaviour
     private void OnMouseDown()
     {
         if (EventSystem.current.IsPointerOverGameObject()) return;
-        var rpc = new RotatePlankCommand(seq);
+        var rpc = new RotatePlankCommand(transform);
         rpc.Execute();
         GameManager.Instance.commands.Add(rpc);
     }

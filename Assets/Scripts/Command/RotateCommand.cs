@@ -1,13 +1,15 @@
+using System;
 using System.Collections;
 using UnityEngine;
 public class RotateCommand : Command
 {
     private Transform _transform;
-    public readonly Vector3 direction;
+    public Vector3 direction;
     private readonly Vector3 _prevDirection;
     private readonly float _overTime = 3f;
     private GameManager gm = GameManager.Instance;
     private IEnumerator coroutine;
+    public bool running;
 
     public RotateCommand(Transform transform, Vector3 direction)
     {
@@ -35,6 +37,7 @@ public class RotateCommand : Command
     
     private IEnumerator Rotate(Vector3 dir)
     {
+        running = true;
         var rotation = Quaternion.LookRotation(dir, Vector3.up);
         var startTime = Time.time;
         while (Time.time < startTime + _overTime)
@@ -46,5 +49,6 @@ public class RotateCommand : Command
         }
         if (_transform != null)
             _transform.rotation = rotation;
+        running = false;
     }
 }

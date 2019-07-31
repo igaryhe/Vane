@@ -8,7 +8,7 @@ public class Vane : MonoBehaviour
     private bool _counted;
     private GameManager _gm;
     private Vector3 lastDir;
-    private RotateCommand rc;
+    public RotateCommand rc;
     public bool _swing;
     public Quaternion first, second;
     private bool clockWise;
@@ -22,6 +22,7 @@ public class Vane : MonoBehaviour
             _counted = true;
             _gm.Decrease();
         }
+        rc = new RotateCommand(transform, Vector3.zero);
     }
 
     private void Update()
@@ -37,7 +38,7 @@ public class Vane : MonoBehaviour
             _counted = false;
             _gm.Increase();
         }
-        // TODO: Make it swing
+        
         if (_swing)
         {
             if (transform.rotation == first)
@@ -67,9 +68,10 @@ public class Vane : MonoBehaviour
     {
         if (other.CompareTag("Wind"))
         {
-            if (rc == null)
+            if (rc.direction == Vector3.zero)
             {
-                rc = new RotateCommand(transform, other.transform.forward);
+                // rc = new RotateCommand(transform, other.transform.forward);
+                rc.direction = other.transform.forward;
                 rc.Execute();
             }
             else if (other.transform.forward == rc.direction)
@@ -78,6 +80,7 @@ public class Vane : MonoBehaviour
                 {
                     _swing = false;
                     rc = new RotateCommand(transform, other.transform.forward);
+                    // rc.direction = other.transform.forward;
                     rc.Execute();
                 }
             }
@@ -92,13 +95,21 @@ public class Vane : MonoBehaviour
                     // rc.Stop();
                     first = Quaternion.LookRotation(rc.direction, Vector3.up);
                     second = Quaternion.LookRotation(other.transform.forward, Vector3.up);
-                    rc = new RotateCommand(transform, other.transform.forward);
+                    // rc = new RotateCommand(transform, other.transform.forward);
+                    rc.direction = other.transform.forward;
                     // rc.Execute();
                     _swing = true;
                 }
             }
             // ci.command.affected.Push(rc);
         }
+    }
+
+    public void ResetDirection()
+    {
+        _swing = false;
+        if (rc.running) rc.Stop();
+        rc.direction = Vector3.zero;
     }
 
     /*
