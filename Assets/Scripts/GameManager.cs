@@ -52,11 +52,8 @@ public class GameManager : MonoBehaviour
     {
         if (_count == 0)
         {
-<<<<<<< HEAD
             am.Play("crow");
-=======
             //_am.Play("crow");
->>>>>>> 0570701df4de95c9e91287cbad8299802437cda8
             ui.SetActive(true);
         }
         else
