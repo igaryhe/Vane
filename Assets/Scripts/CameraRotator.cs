@@ -10,8 +10,8 @@ public class CameraRotator : MonoBehaviour
     private float angleOffset = 45;
     Vector3 lastMousePos;
     private float minSize = 1f;
-    private float maxSize = 5.5f;
-    private readonly float _overTime = .5f;
+    private float maxSize = 4.5f;
+    private readonly float _overTime = 0.5f;
     private bool _running;
     private GameManager _gm;
 
