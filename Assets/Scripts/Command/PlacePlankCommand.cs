@@ -20,7 +20,10 @@ public class PlacePlankCommand : Command
         _instance = Object.Instantiate(_plank, new Vector3(_x + 0.5f, 0.5f, _y + 0.5f), Quaternion.identity);
         _instance.transform.parent = _gm.planks.transform;
         _board.isPlaced = true;
+        var p = _instance.GetComponentInChildren<Plank>();
+        p.seq = _gm._pmax - _gm._pcount;
         _gm.PlankDec();
+        _gm.plankList.Add(_instance.transform);
     }
 
     public override void Undo()

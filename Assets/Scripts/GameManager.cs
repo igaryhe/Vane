@@ -13,15 +13,16 @@ public class GameManager : MonoBehaviour
     public Transform level;
     public int col, row;
     public Vector3 win;
-    public Stack<Command> commands = new Stack<Command>();
+    public List<Command> commands = new List<Command>();
     public GameObject ui;
     public GameObject winds, planks;
     public int levelNum;
     public CameraRotator cr;
+    public List<Transform> plankList;
 
     private const float O = 0.5f;
     public int _count;
-    private int _pcount, _pmax;
+    public int _pcount, _pmax;
     private int _fcount;
     private AudioManager _am;
 
@@ -43,6 +44,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         LoadGame();
+        plankList = new List<Transform>();
         _am = AudioManager.Instance;
     }
 
@@ -63,7 +65,7 @@ public class GameManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.R))
             {
                 Reset();
-                commands = new Stack<Command>();
+                commands.Clear();
             }
 
             if (Input.GetKeyDown(KeyCode.Escape))
@@ -232,6 +234,7 @@ public class GameManager : MonoBehaviour
 
     private void LoadLevel(int l)
     {
+        // plankList = new List<Transform>();
         ui.SetActive(false);
         winds = new GameObject();
         winds.name = "Winds";
@@ -245,6 +248,7 @@ public class GameManager : MonoBehaviour
         
         // read _count, _pcount and _fcount
         file = ReadParam(file);
+        plankList.Clear();
 
         // read fan location
         var fans = new List<string>();
@@ -303,7 +307,7 @@ public class GameManager : MonoBehaviour
     {
         if (commands.Count > 0)
         {
-            commands.Pop();
+            commands.RemoveAt(commands.Count - 1);
             Reset();
             foreach (var c in commands)
             {

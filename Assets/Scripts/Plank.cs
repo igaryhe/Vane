@@ -1,52 +1,45 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Plank : MonoBehaviour, CommandInterface
+public class Plank : MonoBehaviour
 {
     private Renderer[] _rend;
     private MaterialPropertyBlock block, hover;
-    void Start()
+    public int seq;
+    private void Start()
     {
-        _rend = transform.parent.GetComponentsInChildren<Renderer>();
+        _rend = transform.GetComponentsInChildren<Renderer>();
         hover = new MaterialPropertyBlock();
         block = new MaterialPropertyBlock();
         hover.SetColor("_BaseColor", Color.yellow);
-        for(int i = 0; i < _rend.Length; i++)
+        foreach (var t in _rend)
         {
-        _rend[i].GetPropertyBlock(block);
+            t.GetPropertyBlock(block);
         }
     }
     private void OnMouseEnter()
     {
         if (EventSystem.current.IsPointerOverGameObject()) return;
-        for (int i = 0; i < _rend.Length; i++)
+        foreach (var t in _rend)
         {
-            _rend[i].SetPropertyBlock(hover);
+            t.SetPropertyBlock(hover);
         }
-        // _mat.color = Color.gray;
     }
     private void OnMouseExit()
     {
         if (EventSystem.current.IsPointerOverGameObject()) return;
-        for (int i = 0; i < _rend.Length; i++)
+        foreach (var t in _rend)
         {
-            _rend[i].SetPropertyBlock(block);
+            t.SetPropertyBlock(block);
         }
-        // _mat.color = _color;
+
     }
     private void OnMouseDown()
     {
         if (EventSystem.current.IsPointerOverGameObject()) return;
-        var rpc = new RotatePlankCommand(transform);
+        var rpc = new RotatePlankCommand(seq);
         rpc.Execute();
-        // GameManager.Instance.commands.Push(rpc);
-        foreach (Transform item in transform.parent)
-        {
-            if (item.CompareTag("Fan"))
-            {
-                item.Rotate(Vector3.forward, -45);
-            }
-        }
+        GameManager.Instance.commands.Add(rpc);
     }
 
     public Command command { get; set; }
