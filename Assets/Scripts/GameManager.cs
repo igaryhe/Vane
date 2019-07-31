@@ -8,7 +8,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
-    public GameObject vane, fan, plank, board, barrier, stone;
+    public GameObject vane, fan, plank, barrier, stone;
+    public GameObject[] board;
     public TextMeshProUGUI remains;
     public Transform level;
     public int col, row;
@@ -51,7 +52,11 @@ public class GameManager : MonoBehaviour
     {
         if (_count == 0)
         {
+<<<<<<< HEAD
             am.Play("crow");
+=======
+            //_am.Play("crow");
+>>>>>>> 0570701df4de95c9e91287cbad8299802437cda8
             ui.SetActive(true);
         }
         else
@@ -186,7 +191,7 @@ public class GameManager : MonoBehaviour
         {
             for (var j = 0; j != col; j++)
             {
-                var boardInstance = Instantiate(board, new Vector3((i + 0.5f), 0, (j + 0.5f)),
+                var boardInstance = Instantiate(board[Mathf.RoundToInt(Random.Range(0,board.Length))], new Vector3((i + 0.5f), 0, (j + 0.5f)),
                     Quaternion.identity);
                 boardInstance.transform.parent = boards.transform;
                 if (b[i][j] == '.') continue;

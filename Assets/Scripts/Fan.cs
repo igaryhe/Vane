@@ -22,7 +22,7 @@ public class Fan : MonoBehaviour
         if (i > interval)
         {
             i = 0;
-            var instance = Instantiate(windParticle, transform.position + new Vector3(0, 0.5f, 0),
+            var instance = Instantiate(windParticle, transform.position + new Vector3(0, 0.5f, 0) - transform.forward * 5,
                 transform.rotation);
             instance.transform.parent = _gm.winds.transform;
             // instance.GetComponent<Wind>().ci = this;

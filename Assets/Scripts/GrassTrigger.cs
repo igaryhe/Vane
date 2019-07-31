@@ -6,12 +6,7 @@ public class GrassTrigger : MonoBehaviour
 {
     public Vector3 windDir;
     private float i = 0;
-    private Collider lastCol;
-    private Collider currentCol;
 
-    private void Start()
-    {
-    }
 
     private void Update()
     {
