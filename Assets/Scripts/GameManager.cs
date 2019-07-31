@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     public int _count;
     public int _pcount, _pmax;
     private int _fcount;
-    private AudioManager _am;
+    public AudioManager am;
 
     public static GameManager Instance
     {
@@ -45,14 +45,13 @@ public class GameManager : MonoBehaviour
     {
         LoadGame();
         plankList = new List<Transform>();
-        _am = AudioManager.Instance;
     }
 
     private void Update()
     {
         if (_count == 0)
         {
-            _am.Play("crow");
+            am.Play("crow");
             ui.SetActive(true);
         }
         else
