@@ -166,6 +166,7 @@ GameObject:
   - component: {fileID: -1903117777439842613}
   - component: {fileID: -4235688113807330304}
   - component: {fileID: 8120088627222581264}
+  - component: {fileID: 3450630161459437843}
   m_Layer: 2
   m_Name: Vane
   m_TagString: Vane
@@ -234,6 +235,18 @@ CapsuleCollider:
   m_Height: 2.5
   m_Direction: 1
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &3450630161459437843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8185924600733652668}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3804e765e214aa43ab93f8fa59a97fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8185924600959143309
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,6 +496,41 @@ PrefabInstance:
     - target: {fileID: 7561110372842451503, guid: 30fef6f60a2a7324595bbb254fee44cb,
         type: 3}
       propertyPath: m_BlendShapeWeights.Array.data[0]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561110372842451503, guid: 30fef6f60a2a7324595bbb254fee44cb,
+        type: 3}
+      propertyPath: m_AABB.m_Center.x
+      value: 0.0022911886
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561110372842451503, guid: 30fef6f60a2a7324595bbb254fee44cb,
+        type: 3}
+      propertyPath: m_AABB.m_Center.y
+      value: 0.00010387669
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561110372842451503, guid: 30fef6f60a2a7324595bbb254fee44cb,
+        type: 3}
+      propertyPath: m_AABB.m_Center.z
+      value: 0.026778527
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561110372842451503, guid: 30fef6f60a2a7324595bbb254fee44cb,
+        type: 3}
+      propertyPath: m_AABB.m_Extent.x
+      value: 0.01108774
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561110372842451503, guid: 30fef6f60a2a7324595bbb254fee44cb,
+        type: 3}
+      propertyPath: m_AABB.m_Extent.y
+      value: 0.0053573605
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561110372842451503, guid: 30fef6f60a2a7324595bbb254fee44cb,
+        type: 3}
+      propertyPath: m_AABB.m_Extent.z
+      value: 0.029035818
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561110372842451503, guid: 30fef6f60a2a7324595bbb254fee44cb,
+        type: 3}
+      propertyPath: m_DirtyAABB
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 8734327776727637407}
   - component: {fileID: -4293756450223574726}
   - component: {fileID: 4878402008500320714}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: WindBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
