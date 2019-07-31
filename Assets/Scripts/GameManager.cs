@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     public int _count;
     public int _pcount, _pmax;
     private int _fcount;
+    private bool _isPlayed;
     public AudioManager am;
 
     public static GameManager Instance
@@ -59,8 +60,11 @@ public class GameManager : MonoBehaviour
     {
         if (_count == 0)
         {
-            //am.Play("crow");
-            //_am.Play("crow");
+            if (!_isPlayed)
+            {
+                am.Play("crow");
+                _isPlayed = !_isPlayed;
+            }
             ui.SetActive(true);
         }
         else
@@ -253,6 +257,7 @@ public class GameManager : MonoBehaviour
     private void LoadLevel(int l)
     {
         // plankList = new List<Transform>();
+        _isPlayed = false;
         _vanes = new List<VaneData>();
         ui.SetActive(false);
         winds = new GameObject();
