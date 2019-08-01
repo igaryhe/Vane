@@ -212,7 +212,7 @@ public class GameManager : MonoBehaviour
                 boardCompoment.isPlaced = true;
                 if (b[i][j] == 's')
                 {
-                    var instance = Instantiate(stone[Mathf.RoundToInt(Random.Range(0, board.Length))],
+                    var instance = Instantiate(stone[Mathf.RoundToInt(Random.Range(0, stone.Length))],
                         new Vector3(i + O, 0, j + O), Quaternion.identity);
                     instance.transform.parent = items.transform;
                     foreach (Transform item in boardInstance.transform)
