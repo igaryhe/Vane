@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+﻿using System.Collections;
 using UnityEngine;
 
 public class CameraRotator : MonoBehaviour
@@ -49,17 +46,11 @@ public class CameraRotator : MonoBehaviour
         lastMousePos = Input.mousePosition;
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            if (_running) return;
-            StartCoroutine(Rotate(45));
-            // transform.Rotate(Vector3.up, 90, Space.World);
-            angleOffset -= 45;
+            LeftRotate();
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (_running) return;
-            StartCoroutine(Rotate(-45));
-            // transform.Rotate(Vector3.up, -90, Space.World);
-            angleOffset += 45;
+            RightRotate();
         }
     }
     
@@ -77,5 +68,21 @@ public class CameraRotator : MonoBehaviour
         }
         transform.rotation = postRotation;
         _running = false;
+    }
+
+    public void LeftRotate()
+    {
+        if (_running) return;
+        StartCoroutine(Rotate(45));
+        // transform.Rotate(Vector3.up, 90, Space.World);
+        angleOffset -= 45;
+    }
+
+    public void RightRotate()
+    {
+        if (_running) return;
+        StartCoroutine(Rotate(-45));
+        // transform.Rotate(Vector3.up, -90, Space.World);
+        angleOffset += 45;
     }
 }
