@@ -123,7 +123,7 @@ public class Vane : MonoBehaviour
     {
         if (other.CompareTag("Wind"))
         {
-            i = 1f;
+            i = 2f;
         }
     }
     /*
