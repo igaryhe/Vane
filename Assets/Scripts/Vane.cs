@@ -13,6 +13,7 @@ public class Vane : MonoBehaviour
     public Quaternion first, second;
     private bool clockWise;
     private float t;
+    private float i = 0;
 
     private void Start()
     {
@@ -61,6 +62,12 @@ public class Vane : MonoBehaviour
             {
                 transform.rotation = Quaternion.Slerp(transform.rotation, first, t);
             }
+            if(i < 0f && rc.direction != Vector3.zero)
+            {
+                transform.rotation = Quaternion.LookRotation(rc.direction, Vector3.up);
+                _swing = false;
+            }
+            i -= Time.deltaTime * 1f;
         }
     }
 
@@ -112,6 +119,13 @@ public class Vane : MonoBehaviour
         rc.direction = Vector3.zero;
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Wind"))
+        {
+            i = 1f;
+        }
+    }
     /*
     private void OnTriggerEnter(Collider other)
     {
