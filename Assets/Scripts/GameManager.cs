@@ -7,8 +7,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
-    public GameObject vane, fan, plank, barrier, stone;
-    public GameObject[] board;
+    public GameObject vane, fan, plank, barrier;
+    public GameObject[] board, stone;
     public TextMeshProUGUI remains;
     public Transform level;
     [HideInInspector]
@@ -212,7 +212,7 @@ public class GameManager : MonoBehaviour
                 boardCompoment.isPlaced = true;
                 if (b[i][j] == 's')
                 {
-                    var instance = Instantiate(stone, new Vector3(i + O, 0, j + O), Quaternion.identity);
+                    var instance = Instantiate(stone[Mathf.RoundToInt(Random.Range(0, board.Length))], new Vector3(i + O, 0, j + O), Quaternion.identity);
                     instance.transform.parent = items.transform;
                     foreach (Transform item in boardInstance.transform)
                     {

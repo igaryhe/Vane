@@ -47,11 +47,14 @@ MonoBehaviour:
   fan: {fileID: 794033194189785267, guid: 873e75e2f701046809b5ac8a390a5058, type: 3}
   plank: {fileID: 8788796717902752319, guid: 78e7431c2a8f4410aad9c3474b587e5e, type: 3}
   barrier: {fileID: 0}
-  stone: {fileID: 0}
   board:
   - {fileID: 9162214357468293788, guid: 6f29a1f75d2c34786bdb554bfe380b55, type: 3}
   - {fileID: 9162214357468293788, guid: 8f6a19a423efa54469bd977f432e6f5d, type: 3}
   - {fileID: 9162214357468293788, guid: 757a5f9b79c353a46ae304b93e33b989, type: 3}
+  stone:
+  - {fileID: 5158370717976609893, guid: 7babc1ec5cbd34991b92db8ce0204976, type: 3}
+  - {fileID: 5158370717976609893, guid: eb07159bcb054a74bb171f7e9ed8bdf5, type: 3}
+  - {fileID: 5158370717976609893, guid: ac3f87e4d76b30342a10c424f9b4c166, type: 3}
   remains: {fileID: 0}
   level: {fileID: 0}
   col: 0
@@ -62,4 +65,8 @@ MonoBehaviour:
   planks: {fileID: 0}
   levelNum: 0
   cr: {fileID: 0}
+  plankList: []
   _count: 0
+  _pcount: 0
+  _pmax: 0
+  am: {fileID: 0}
