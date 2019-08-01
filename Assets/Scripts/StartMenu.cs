@@ -5,11 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class StartMenu : MonoBehaviour
 {
-    public AudioSource bgm;
+    private AudioSource bgm;
+
+    private void Start()
+    {
+        bgm = PersistAudio.Instance.gameObject.GetComponent<AudioSource>();
+    }
+
     public void OnClick()
     {
-        SceneManager.LoadScene("Selection");
         bgm.volume = 0.3f;
+        SceneManager.LoadScene("Selection");
     }
 
     private void Update()

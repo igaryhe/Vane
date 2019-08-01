@@ -5,8 +5,21 @@ using UnityEngine;
 
 public class PersistAudio : MonoBehaviour
 {
+    private static PersistAudio instance;
+
+    public static PersistAudio Instance
+    {
+        get { return instance; }
+    }
+
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+        DontDestroyOnLoad(gameObject);    
     }
 }

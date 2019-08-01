@@ -468,7 +468,7 @@ MonoBehaviour:
     pitch: 1
     source: {fileID: 0}
   - name: j
-    clip: {fileID: 8300000, guid: db520a2aae31f464384b9013e7be4231, type: 3}
+    clip: {fileID: 8300000, guid: 1f1139111a97844048a1625ea8e3b206, type: 3}
     pitch: 1
     source: {fileID: 0}
 --- !u!4 &605315452
@@ -885,7 +885,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3
+  orthographic size: 2
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
