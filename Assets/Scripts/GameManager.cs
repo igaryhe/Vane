@@ -216,7 +216,7 @@ public class GameManager : MonoBehaviour
                     instance.transform.parent = items.transform;
                     foreach (Transform item in boardInstance.transform)
                     {
-                        if (item.CompareTag("Grass")) Destroy(item.gameObject);
+                        if (item.CompareTag("Grass") || item.CompareTag("Flower")) Destroy(item.gameObject);
                     }
                 }
                 else if (b[i][j] == 'b')
