@@ -12,6 +12,7 @@ TagManager:
   - Barrier
   - Grass
   - Fan
+  - Flower
   layers:
   - Default
   - TransparentFX
