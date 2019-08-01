@@ -10,7 +10,7 @@ public class Board : MonoBehaviour
     private Color _color;
     private Vector3 _pos;
     private GameManager _gm;
-    private Material grass;
+    private Material grass, flower;
     private MaterialPropertyBlock block, hover;
     private Vector3 windDirection;
     private Vector3 lastDirection;
@@ -25,6 +25,7 @@ public class Board : MonoBehaviour
         _rend = GetComponent<Renderer>();
         _mat = GetComponent<Renderer>().material;
         grass = GetComponentsInChildren<Renderer>()[1].material;
+        flower = GetComponentsInChildren<Renderer>()[2].material;
         _color = _mat.color;
         _pos = transform.position;
         _gm = GameManager.Instance;
@@ -33,6 +34,10 @@ public class Board : MonoBehaviour
             if (item.CompareTag("Grass"))
             {
                 item.gameObject.GetComponent<Renderer>().material = grass;
+            }
+            if (item.CompareTag("Flower"))
+            {
+                item.gameObject.GetComponent<Renderer>().material = flower;
             }
         }
         hover = new MaterialPropertyBlock();
@@ -100,6 +105,9 @@ public class Board : MonoBehaviour
             grass.SetVector("_WindDir", Vector3.Lerp(lastDirection, windDirection, i));
             //grass.SetFloat("_WindSpd", Mathf.Lerp(0.1f, 1f, Vector3.Lerp(lastDirection.normalized, windDirection.normalized, i).magnitude));
             grass.SetFloat("_WindSpd", Mathf.Lerp(0.1f, 1f, windDirection.normalized.magnitude));
+            flower.SetVector("_WindDir", Vector3.Lerp(lastDirection, windDirection, i));
+            flower.SetFloat("_WindSpd", Mathf.Lerp(0.1f, 1f, windDirection.normalized.magnitude));
+
         }
         i += Time.deltaTime * 3;
     }

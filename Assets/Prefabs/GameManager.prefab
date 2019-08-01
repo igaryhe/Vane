@@ -51,6 +51,9 @@ MonoBehaviour:
   - {fileID: 9162214357468293788, guid: 6f29a1f75d2c34786bdb554bfe380b55, type: 3}
   - {fileID: 9162214357468293788, guid: 8f6a19a423efa54469bd977f432e6f5d, type: 3}
   - {fileID: 9162214357468293788, guid: 757a5f9b79c353a46ae304b93e33b989, type: 3}
+  - {fileID: 9162214357468293788, guid: 3ae06a5697b136b42aadf8bd7cae1fff, type: 3}
+  - {fileID: 9162214357468293788, guid: 55f1bbf7be9d7db409af2b3b43bb1ef3, type: 3}
+  - {fileID: 9162214357468293788, guid: 797ea433283e1fe42bba440074b831d3, type: 3}
   stone:
   - {fileID: 5158370717976609893, guid: 7babc1ec5cbd34991b92db8ce0204976, type: 3}
   - {fileID: 5158370717976609893, guid: eb07159bcb054a74bb171f7e9ed8bdf5, type: 3}
