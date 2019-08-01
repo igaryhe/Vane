@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class Board : MonoBehaviour
@@ -19,10 +20,13 @@ public class Board : MonoBehaviour
     private float lastStr = 0.1f;
     private float windStr = 0.1f;
 
+    private void Awake()
+    {
+        _rend = GetComponent<Renderer>();
+    }
     private void Start()
     {
         _gt = GetComponentInChildren<GrassTrigger>();
-        _rend = GetComponent<Renderer>();
         _mat = GetComponent<Renderer>().material;
         grass = GetComponentsInChildren<Renderer>()[1].material;
         flower = GetComponentsInChildren<Renderer>()[2].material;

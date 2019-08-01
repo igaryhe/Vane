@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     private static GameManager _instance;
     public GameObject vane, fan, plank, barrier;
     public GameObject[] board, stone;
-    public TextMeshProUGUI remains;
+    public TextMeshProUGUI remains, lNum;
     public Transform level;
     [HideInInspector]
     public int col, row;
@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     public Vector3 win;
     [HideInInspector]
     public List<Command> commands = new List<Command>();
-    public GameObject ui;
+    public GameObject ui, over;
     [HideInInspector]
     public GameObject winds, planks;
     [HideInInspector]
@@ -212,7 +212,8 @@ public class GameManager : MonoBehaviour
                 boardCompoment.isPlaced = true;
                 if (b[i][j] == 's')
                 {
-                    var instance = Instantiate(stone[Mathf.RoundToInt(Random.Range(0, board.Length))], new Vector3(i + O, 0, j + O), Quaternion.identity);
+                    var instance = Instantiate(stone[Mathf.RoundToInt(Random.Range(0, board.Length))],
+                        new Vector3(i + O, 0, j + O), Quaternion.identity);
                     instance.transform.parent = items.transform;
                     foreach (Transform item in boardInstance.transform)
                     {
@@ -262,9 +263,11 @@ public class GameManager : MonoBehaviour
     private void LoadLevel(int l)
     {
         // plankList = new List<Transform>();
+        lNum.text = "Level " + l;
         _isPlayed = false;
         _vanes = new List<VaneData>();
         ui.SetActive(false);
+        over.SetActive(false);
         winds = new GameObject();
         winds.name = "Winds";
         winds.transform.parent = level;
@@ -307,6 +310,7 @@ public class GameManager : MonoBehaviour
     public void NextLevel()
     {
         levelNum++;
+        am.Stop("crow");
         DestroyLevel();
         // level.gameObject.SetActive(true);
         LoadLevel(levelNum);
