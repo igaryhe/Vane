@@ -20,6 +20,9 @@ public class Board : MonoBehaviour
     private float lastStr = 0.1f;
     private float windStr = 0.1f;
     private bool pointerOut = false;
+    private bool isDrag = false;
+    private Vector2 clickPos;
+    private Vector2 mousePos;
 
     private void Awake()
     {
@@ -51,8 +54,9 @@ public class Board : MonoBehaviour
         hover.SetColor("_BaseColor", green);
         _rend.GetPropertyBlock(block);
     }
+    
 
-    private void OnMouseEnter()
+    private void OnMouseOver()
     {
         if (!isPlaced)
         {
@@ -72,10 +76,16 @@ public class Board : MonoBehaviour
         pointerOut = true;
     }
 
+    private void OnMouseDown()
+    {
+        clickPos = Input.mousePosition;
+    }
+
     private void OnMouseUp()
     {
+        clickPos = Vector2.zero;
         if (EventSystem.current.IsPointerOverGameObject() || pointerOut == true) return;
-        if (!isPlaced)
+        if (!isPlaced && isDrag == false)
         {
             if (_pos.x < 0f && _pos.z < 0f ||
                 _pos.x < 0f && _pos.z > _gm.col ||
@@ -97,11 +107,18 @@ public class Board : MonoBehaviour
                 }
             }
         }
+        isDrag = false;
     }
 
     private void Update()
     {
-        if(i > 1) //per 1/3s update grass floating dirction
+        if (clickPos != Vector2.zero && i > 1f) //per 1/3s cauclate the delta mouse position 
+        {
+            mousePos = Input.mousePosition;
+            if ((mousePos - clickPos).magnitude > 0.5f) isDrag = true;
+        }
+        if(isDrag == true) _rend.SetPropertyBlock(block);
+        if (i > 1) //per 1/3s update grass floating dirction
         {
             i = 0;
             lastDirection = windDirection;

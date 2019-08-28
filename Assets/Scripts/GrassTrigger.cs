@@ -48,6 +48,7 @@ public class GrassTrigger : MonoBehaviour
             main.loop = true;
             var emit = leaf.emission;
             emit.enabled = true;
+            leaf.Play();
             var vel = leaf.velocityOverLifetime;
             vel.x = -windDir.z * 1.25f;
             vel.z = windDir.x * 1.25f;
@@ -57,6 +58,7 @@ public class GrassTrigger : MonoBehaviour
                 main.loop = true;
                 emit = petal.emission;
                 emit.enabled = true;
+                petal.Play();
                 vel = petal.velocityOverLifetime;
                 vel.x = -windDir.z * 1.25f;
                 vel.z = windDir.x * 1.25f;

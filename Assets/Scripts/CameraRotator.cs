@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CameraRotator : MonoBehaviour
 {
-    private float speed = 0.01f;
+    private float speed = 0.007f;
     private float angleOffset = 45;
     Vector3 lastMousePos;
     private float minSize = 1f;
@@ -30,7 +30,7 @@ public class CameraRotator : MonoBehaviour
         {
             Camera.main.orthographicSize -= 0.5f;
         }
-        if (Input.GetMouseButton(2))
+        if (Input.GetMouseButton(2) || Input.GetMouseButton(0))
         {
             if(lastMousePos != Vector3.zero)
             {
@@ -39,7 +39,7 @@ public class CameraRotator : MonoBehaviour
                 transform.position += new Vector3(offset.x, 0, offset.y);
             }
         }
-        if (Input.GetMouseButtonUp(2))
+        if (Input.GetMouseButtonUp(2) || Input.GetMouseButton(0))
         {
             lastMousePos = Vector3.zero;
         }
