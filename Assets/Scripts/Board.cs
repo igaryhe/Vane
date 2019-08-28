@@ -19,6 +19,7 @@ public class Board : MonoBehaviour
     private GrassTrigger _gt;
     private float lastStr = 0.1f;
     private float windStr = 0.1f;
+    private bool pointerOut = false;
 
     private void Awake()
     {
@@ -53,22 +54,27 @@ public class Board : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        // _mat.color = Color.gray;
-        if (EventSystem.current.IsPointerOverGameObject()) return;
-        _rend.SetPropertyBlock(hover);
+        if (!isPlaced)
+        {
+            // _mat.color = Color.gray;
+            //if (EventSystem.current.IsPointerOverGameObject()) return;
+            _rend.SetPropertyBlock(hover);
+            pointerOut = false;
+        }
     }
 
 
     private void OnMouseExit()
     {
         // _mat.color = _color;
-        if (EventSystem.current.IsPointerOverGameObject()) return;
+        //if (EventSystem.current.IsPointerOverGameObject()) return;
         _rend.SetPropertyBlock(block);
+        pointerOut = true;
     }
 
-    private void OnMouseDown()
+    private void OnMouseUp()
     {
-        if (EventSystem.current.IsPointerOverGameObject()) return;
+        if (EventSystem.current.IsPointerOverGameObject() || pointerOut == true) return;
         if (!isPlaced)
         {
             if (_pos.x < 0f && _pos.z < 0f ||
@@ -95,7 +101,7 @@ public class Board : MonoBehaviour
 
     private void Update()
     {
-        if(i > 1)
+        if(i > 1) //per 1/3s update grass floating dirction
         {
             i = 0;
             lastDirection = windDirection;

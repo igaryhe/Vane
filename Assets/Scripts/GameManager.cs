@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
     private bool _isPlayed;
     public AudioManager am;
 
+    private float i; //for win check delay
+
     public static GameManager Instance
     {
         get
@@ -61,19 +63,24 @@ public class GameManager : MonoBehaviour
     {
         if (_count == 0)
         {
-            if (!_isPlayed)
+            i += Time.deltaTime;
+            if (i > 1f)
             {
-                am.Play("crow");
-                _isPlayed = !_isPlayed;
-                foreach (var v in _vanes)
+                if (!_isPlayed)
                 {
-                    v.tr.gameObject.GetComponent<Celebrate>().enabled = true;
+                    am.Play("crow");
+                    _isPlayed = !_isPlayed;
+                    foreach (var v in _vanes)
+                    {
+                        v.tr.gameObject.GetComponent<Celebrate>().enabled = true;
+                    }
                 }
+                ui.SetActive(true);
             }
-            ui.SetActive(true);
         }
         else
         {
+            i = 0f;
             if (Input.GetKeyDown(KeyCode.Z))
             {
                 Undo();
@@ -217,7 +224,7 @@ public class GameManager : MonoBehaviour
                     instance.transform.parent = items.transform;
                     foreach (Transform item in boardInstance.transform)
                     {
-                        if (item.CompareTag("Grass") || item.CompareTag("Flower")) Destroy(item.gameObject);
+                        if (item.CompareTag("Grass") || item.CompareTag("Flower") || item.CompareTag("Trigger")) Destroy(item.gameObject);
                     }
                 }
                 else if (b[i][j] == 'b')

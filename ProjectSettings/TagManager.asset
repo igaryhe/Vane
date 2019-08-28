@@ -13,6 +13,7 @@ TagManager:
   - Grass
   - Fan
   - Flower
+  - Trigger
   layers:
   - Default
   - TransparentFX
