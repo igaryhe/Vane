@@ -49,7 +49,7 @@ public class Wind : MonoBehaviour
                 transform.forward = right;
                 //transform.GetChild(1).forward = dir;
                 //var pos = transform.GetChild(1).position;
-                transform.position = other.transform.position + new Vector3(0.15f, 0f, 0f);
+                transform.position = other.transform.position + other.transform.right * 0.15f;
                 //transform.GetChild(1).position = pos;
             }
             else if (i < -0.1 && i > -0.9)
@@ -59,7 +59,7 @@ public class Wind : MonoBehaviour
                 transform.forward = -right;
                 //transform.GetChild(1).forward = dir;
                 //var pos = transform.GetChild(1).position;
-                transform.position = other.transform.position - new Vector3(0.15f, 0f, 0f);
+                transform.position = other.transform.position - other.transform.right * 0.15f;
                 //transform.GetChild(1).position = pos;
             }
             else if (i > -0.1 && i < 0.1)
