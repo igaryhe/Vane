@@ -54,11 +54,11 @@ public class Board : MonoBehaviour
         hover.SetColor("_BaseColor", green);
         _rend.GetPropertyBlock(block);
     }
-    
+
 
     private void OnMouseOver()
     {
-        if (!isPlaced)
+        if (!isPlaced && _gm._pcount > 0)
         {
             // _mat.color = Color.gray;
             //if (EventSystem.current.IsPointerOverGameObject()) return;
