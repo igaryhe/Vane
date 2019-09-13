@@ -12,15 +12,29 @@ public class Wind : MonoBehaviour
     private float speed = 4f;
     private float rdm;
     private ParticleSystem windPS;
+    private Transform windPartical;
+    private Vector3 lastPos;
+    private Quaternion lastRot;
     // Start is called before the first frame update
     private void Start()
     {
-        windPS = GetComponent<ParticleSystem>();
+        windPS = GetComponentInChildren<ParticleSystem>();
         rdm = Random.Range(1f, 2f);
         _rb = GetComponent<Rigidbody>();
         _rb.velocity = speed * transform.forward;
+        windPartical = transform.GetChild(1);
+        windPartical.SetParent(transform.parent);
+        lastPos = transform.position;
+        lastRot = transform.rotation;
     }
-    
+
+    private void LateUpdate()
+    {
+        windPartical.position = Vector3.Lerp(lastPos, transform.position, Time.deltaTime * 6f);
+        windPartical.rotation = Quaternion.Lerp(lastRot, transform.rotation, Time.deltaTime * 6f);
+        lastPos = windPartical.position;
+        lastRot = windPartical.rotation;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -31,14 +45,22 @@ public class Wind : MonoBehaviour
             if (i > 0.1 && i < 0.9)
             {
                 _rb.velocity = right * speed;
+                //var dir = transform.GetChild(1).forward;
                 transform.forward = right;
+                //transform.GetChild(1).forward = dir;
+                //var pos = transform.GetChild(1).position;
                 transform.position = other.transform.position + new Vector3(0.15f, 0f, 0f);
+                //transform.GetChild(1).position = pos;
             }
             else if (i < -0.1 && i > -0.9)
             {
                 _rb.velocity = -right * speed;
+                //var dir = transform.GetChild(1).forward;
                 transform.forward = -right;
+                //transform.GetChild(1).forward = dir;
+                //var pos = transform.GetChild(1).position;
                 transform.position = other.transform.position - new Vector3(0.15f, 0f, 0f);
+                //transform.GetChild(1).position = pos;
             }
             else if (i > -0.1 && i < 0.1)
             {

@@ -58,7 +58,7 @@ public class Board : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if (!isPlaced && _gm._pcount > 0)
+        if (!isPlaced && _gm._pcount > 0 && isDrag == false)
         {
             // _mat.color = Color.gray;
             //if (EventSystem.current.IsPointerOverGameObject()) return;
@@ -66,6 +66,8 @@ public class Board : MonoBehaviour
             pointerOut = false;
         }
     }
+
+
 
 
     private void OnMouseExit()
@@ -107,18 +109,19 @@ public class Board : MonoBehaviour
                 }
             }
         }
-        isDrag = false;
+        //isDrag = false;
     }
 
     private void Update()
     {
+        if (Input.GetMouseButtonUp(0) || Input.GetMouseButtonUp(2)) isDrag = false;
         if (clickPos != Vector2.zero && i > 1f) //per 1/3s cauclate the delta mouse position 
         {
             mousePos = Input.mousePosition;
             if ((mousePos - clickPos).magnitude > 0.5f) isDrag = true;
         }
-        if(isDrag == true) _rend.SetPropertyBlock(block);
-        if (i > 1) //per 1/3s update grass floating dirction
+        //if(isDrag == true) _rend.SetPropertyBlock(block);
+        if (i > 1) //per 1/3s update grass floating direction
         {
             i = 0;
             lastDirection = windDirection;
