@@ -126,7 +126,7 @@ public class Board : MonoBehaviour
             i = 0;
             lastDirection = windDirection;
             lastStr = windStr;
-            windDirection = Quaternion.Euler(0,0,90) * new Vector3(_gt.windDir.x, _gt.windDir.z, 0);
+            windDirection = Quaternion.Euler(0, 0, 90) * new Vector3(_gt.windDir.x, _gt.windDir.z, 0);
             windDirection *= 0.2f;
             windStr = 1;
         }
